@@ -388,12 +388,13 @@ function BookingForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
     setStatus("sending");
     setNotice("");
 
     try {
-      const result = await submitBookingRequest(new FormData(event.currentTarget));
-      event.currentTarget.reset();
+      const result = await submitBookingRequest(new FormData(form));
+      form.reset();
       setStatus("success");
       setNotice(
         result.offline
