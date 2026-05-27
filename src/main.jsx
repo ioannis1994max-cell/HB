@@ -79,12 +79,12 @@ const testimonials = [
 function Logo() {
   return (
     <a href="#home" className="group flex items-center gap-3" aria-label="Hapeshis Brothers Agency home">
-      <span className="grid h-12 w-12 place-items-center rounded-sm border border-white/15 bg-white/[0.06] text-lg font-black text-white shadow-premium transition group-hover:border-signal/70">
+      <span className="grid h-12 w-12 place-items-center rounded-sm border border-white/20 bg-white/[0.06] text-lg font-black text-white shadow-premium transition group-hover:border-signal/70">
         HB
       </span>
       <span className="leading-tight">
         <span className="block text-sm font-black uppercase tracking-[0.16em] text-white">Hapeshis Brothers</span>
-        <span className="block text-xs uppercase tracking-[0.22em] text-white/55">Agency</span>
+        <span className="block text-xs uppercase tracking-[0.22em] text-white/50">Agency</span>
       </span>
     </a>
   );
@@ -93,7 +93,7 @@ function Logo() {
 function Button({ href, children, variant = "primary", icon: Icon = ArrowRight, ...props }) {
   const classes = {
     primary: "bg-signal text-white hover:bg-ember shadow-[0_18px_44px_rgba(207,36,56,0.28)]",
-    secondary: "border border-white/15 bg-white/[0.04] text-white hover:border-white/35 hover:bg-white/[0.08]",
+    secondary: "border border-white/20 bg-white/[0.04] text-white hover:border-white/40 hover:bg-white/[0.08]",
     dark: "bg-ink text-white hover:bg-steel",
   };
 
@@ -111,7 +111,7 @@ function Button({ href, children, variant = "primary", icon: Icon = ArrowRight, 
 
 function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-ink/78 backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary">
         <Logo />
         <div className="hidden items-center gap-8 lg:flex">
@@ -119,7 +119,7 @@ function Header() {
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-xs font-bold uppercase tracking-[0.18em] text-white/62 transition hover:text-white"
+              className="text-xs font-bold uppercase tracking-[0.18em] text-white/60 transition hover:text-white"
             >
               {item}
             </a>
@@ -135,9 +135,9 @@ function Header() {
 
 function HeroDashboard() {
   return (
-    <div className="rounded-sm border border-white/12 bg-white/[0.05] p-5 shadow-premium backdrop-blur">
+    <div className="rounded-sm border border-white/10 bg-white/[0.05] p-5 shadow-premium backdrop-blur">
       <div className="rounded-sm bg-[radial-gradient(circle_at_35%_20%,rgba(255,65,87,0.24),transparent_27%),linear-gradient(145deg,#0c2342,#050608)] p-6">
-        <div className="rounded-sm border border-white/14 bg-ink/72 p-7">
+        <div className="rounded-sm border border-white/10 bg-ink/70 p-7">
           <div className="flex items-center justify-between">
             <div className="grid h-20 w-20 place-items-center rounded-sm border border-signal/60 bg-signal/10 text-3xl font-black text-white">
               HB
@@ -146,11 +146,11 @@ function HeroDashboard() {
               Live
             </span>
           </div>
-          <p className="mt-8 text-sm font-black uppercase tracking-[0.22em] text-white/48">Client Dashboard</p>
+          <p className="mt-8 text-sm font-black uppercase tracking-[0.22em] text-white/50">Client Dashboard</p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {results.map(([label, value, change]) => (
               <div key={label} className="rounded-sm border border-white/10 bg-white/[0.045] p-4 transition hover:border-signal/40">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/38">{label}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
                 <p className="mt-3 text-3xl font-black tracking-normal text-white">{value}</p>
                 <p className="mt-1 text-sm font-bold text-emerald-300">{change}</p>
               </div>
@@ -163,7 +163,7 @@ function HeroDashboard() {
               ["Lead quality", "78%"],
             ].map(([label, width]) => (
               <div key={label}>
-                <div className="mb-2 flex justify-between text-xs font-bold uppercase tracking-[0.14em] text-white/42">
+                <div className="mb-2 flex justify-between text-xs font-bold uppercase tracking-[0.14em] text-white/40">
                   <span>{label}</span>
                   <span>{width}</span>
                 </div>
@@ -194,21 +194,21 @@ function Hero() {
 
       <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.06fr_0.94fr] lg:px-8">
         <div>
-          <p className="mb-5 inline-flex items-center gap-2 rounded-sm border border-signal/45 bg-signal/10 px-3 py-2 text-xs font-black uppercase tracking-[0.2em] text-red-100">
+          <p className="mb-5 inline-flex items-center gap-2 rounded-sm border border-signal/50 bg-signal/10 px-3 py-2 text-xs font-black uppercase tracking-[0.2em] text-red-100">
             <Sparkles className="h-4 w-4 text-ember" aria-hidden="true" />
             AI-powered marketing agency
           </p>
           <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-normal text-white sm:text-6xl lg:text-7xl">
             We Help Businesses Get More Clients Online
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/68 sm:text-xl">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
             Websites, ads, and social media systems that bring real results, built for clinics and service businesses ready to grow.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button href="#book-appointment">Book a Free Consultation</Button>
             <Button href="#services" variant="secondary">Explore Services</Button>
           </div>
-          <div className="mt-9 flex flex-wrap gap-3 text-sm font-semibold text-white/66">
+          <div className="mt-9 flex flex-wrap gap-3 text-sm font-semibold text-white/70">
             {["No long contracts", "Results-focused", "Worldwide service"].map((item) => (
               <span key={item} className="inline-flex items-center gap-2">
                 <BadgeCheck className="h-4 w-4 text-ember" aria-hidden="true" />
@@ -225,7 +225,7 @@ function Hero() {
         {stats.map(([value, label]) => (
           <div key={label} className="border-white/10 py-7 odd:border-r lg:border-r lg:last:border-r-0">
             <p className="text-4xl font-black text-white">{value}</p>
-            <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-white/45">{label}</p>
+            <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-white/50">{label}</p>
           </div>
         ))}
       </div>
@@ -240,7 +240,7 @@ function Services() {
         <div className="max-w-3xl">
           <p className="section-kicker">What We Do</p>
           <h2 className="section-title">Full-stack growth systems</h2>
-          <p className="mt-5 text-lg leading-8 text-white/58">
+          <p className="mt-5 text-lg leading-8 text-white/60">
             Everything you need to attract, convert, and retain clients, built and managed by experts.
           </p>
         </div>
@@ -268,7 +268,7 @@ function Services() {
 function MetricPill({ label, value }) {
   return (
     <div className="rounded-sm border border-white/10 bg-white/[0.055] p-4">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/38">{label}</p>
+      <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
       <p className="mt-3 text-3xl font-black text-white">{value}</p>
     </div>
   );
@@ -281,7 +281,7 @@ function About() {
         <div>
           <p className="section-kicker">Why Hapeshis Brothers</p>
           <h2 className="section-title">Modern strategy. AI execution. Real growth.</h2>
-          <p className="mt-6 text-lg leading-8 text-white/62">
+          <p className="mt-6 text-lg leading-8 text-white/60">
             We do not sell marketing fluff. We build measurable client-acquisition systems for businesses that mean business.
           </p>
           <div className="mt-9 space-y-4">
@@ -291,7 +291,7 @@ function About() {
                   <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-ember" aria-hidden="true" />
                   <div>
                     <h3 className="font-bold text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-white/56">{text}</p>
+                    <p className="mt-2 text-sm leading-6 text-white/60">{text}</p>
                   </div>
                 </div>
               </div>
@@ -299,18 +299,18 @@ function About() {
           </div>
         </div>
 
-        <div className="rounded-sm border border-white/12 bg-white/[0.05] p-6 shadow-premium">
+        <div className="rounded-sm border border-white/10 bg-white/[0.05] p-6 shadow-premium">
           <div className="flex items-center justify-between border-b border-white/10 pb-5">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/42">Client Dashboard</p>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/40">Client Dashboard</p>
               <h3 className="mt-2 text-2xl font-black text-white">Growth Engine Live</h3>
             </div>
             <BarChart3 className="h-8 w-8 text-ember" aria-hidden="true" />
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {results.map(([label, value, change]) => (
-              <div key={label} className="rounded-sm bg-ink/68 p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/38">{label}</p>
+              <div key={label} className="rounded-sm bg-ink/70 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
                 <p className="mt-3 text-3xl font-black text-white">{value}</p>
                 <p className="mt-1 text-sm font-bold text-emerald-300">{change}</p>
               </div>
@@ -335,7 +335,7 @@ function Process() {
           <div>
             <p className="section-kicker">How It Works</p>
             <h2 className="section-title">A cleaner path from attention to booked calls.</h2>
-            <p className="mt-5 text-lg leading-8 text-white/58">
+            <p className="mt-5 text-lg leading-8 text-white/60">
               The site, campaigns, analytics, and appointment flow work together as one growth engine.
             </p>
           </div>
@@ -346,7 +346,7 @@ function Process() {
                   {index + 1}
                 </div>
                 <h3 className="text-xl font-black text-white">{title}</h3>
-                <p className="mt-4 text-sm leading-7 text-white/58">{text}</p>
+                <p className="mt-4 text-sm leading-7 text-white/60">{text}</p>
               </article>
             ))}
           </div>
@@ -363,16 +363,16 @@ function Testimonials() {
         <div className="max-w-3xl">
           <p className="section-kicker">Client Results</p>
           <h2 className="section-title">Trusted by ambitious businesses</h2>
-          <p className="mt-5 text-lg leading-8 text-white/58">Real outcomes from real clients. We let the work speak.</p>
+          <p className="mt-5 text-lg leading-8 text-white/60">Real outcomes from real clients. We let the work speak.</p>
         </div>
 
         <div className="mt-12 grid gap-4 lg:grid-cols-3">
           {testimonials.map(([quote, name, role]) => (
             <figure key={name} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
-              <blockquote className="text-lg leading-8 text-white/72">"{quote}"</blockquote>
+              <blockquote className="text-lg leading-8 text-white/70">"{quote}"</blockquote>
               <figcaption className="mt-8 border-t border-white/10 pt-5">
                 <p className="font-black text-white">{name}</p>
-                <p className="mt-1 text-sm text-white/45">{role}</p>
+                <p className="mt-1 text-sm text-white/50">{role}</p>
               </figcaption>
             </figure>
           ))}
@@ -412,7 +412,7 @@ function BookingForm() {
         <div>
           <p className="section-kicker text-signal">Book Appointment</p>
           <h2 className="section-title text-ink">Your next 30 days could change everything.</h2>
-          <p className="mt-6 text-lg leading-8 text-black/62">
+          <p className="mt-6 text-lg leading-8 text-black/60">
             Book a free strategy call and we will show you exactly how to get more clients, whether you work with us or not.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -489,7 +489,7 @@ function Contact() {
             ].map(([Icon, label, value]) => (
               <div key={label} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
                 <Icon className="h-5 w-5 text-ember" aria-hidden="true" />
-                <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/42">{label}</p>
+                <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/40">{label}</p>
                 <p className="mt-2 text-lg font-bold text-white">{value}</p>
               </div>
             ))}
@@ -518,10 +518,10 @@ function Footer() {
     <footer className="border-t border-white/10 bg-ink py-10 text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <Logo />
-        <p className="max-w-lg text-sm leading-6 text-white/45">
+        <p className="max-w-lg text-sm leading-6 text-white/50">
           AI-powered marketing systems that bring real clients to small businesses, clinics, and service professionals worldwide.
         </p>
-        <p className="text-sm text-white/45">(c) 2026 Hapeshis Brothers Agency. All rights reserved.</p>
+        <p className="text-sm text-white/50">(c) 2026 Hapeshis Brothers Agency. All rights reserved.</p>
       </div>
     </footer>
   );

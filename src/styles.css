@@ -47,13 +47,13 @@
   }
 
   .form-field {
-    @apply grid gap-2 text-xs font-black uppercase tracking-[0.16em] text-black/58;
+    @apply grid gap-2 text-xs font-black uppercase tracking-[0.16em] text-black/60;
   }
 
   .form-field input,
   .form-field select,
   .form-field textarea {
-    @apply w-full border border-black/10 bg-white px-4 py-3 text-base font-semibold normal-case tracking-normal text-ink outline-none transition placeholder:text-black/35 focus:border-signal focus:ring-4 focus:ring-signal/10;
+    @apply w-full border border-black/10 bg-white px-4 py-3 text-base font-semibold normal-case tracking-normal text-ink outline-none transition placeholder:text-black/40 focus:border-signal focus:ring-4 focus:ring-signal/10;
   }
 
   .social-button {
