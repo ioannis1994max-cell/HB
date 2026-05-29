@@ -68,6 +68,182 @@
     @apply grid h-12 w-12 place-items-center rounded-md text-white shadow-blue transition hover:-translate-y-1;
   }
 
+  .contact-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .contact-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: 1rem;
+    min-height: 8rem;
+    align-items: start;
+    overflow: hidden;
+    border: 1px solid rgba(125, 211, 252, 0.14);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.022)),
+      rgba(8, 24, 52, 0.68);
+    padding: 1.25rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .contact-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.15), transparent 36%),
+      linear-gradient(135deg, rgba(56, 189, 248, 0.06), rgba(139, 92, 246, 0.08));
+    transition: opacity 320ms ease;
+  }
+
+  .contact-card:hover::before {
+    opacity: 1;
+  }
+
+  .contact-card > * {
+    position: relative;
+  }
+
+  .contact-icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    place-items: center;
+    border: 1px solid rgba(125, 211, 252, 0.18);
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.09);
+    color: #bae6fd;
+    transition:
+      border-color 320ms ease,
+      color 320ms ease,
+      transform 320ms ease;
+  }
+
+  .contact-card:hover .contact-icon {
+    border-color: rgba(125, 211, 252, 0.36);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .contact-label {
+    color: rgba(226, 232, 240, 0.52);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .contact-value {
+    margin-top: 0.55rem;
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.35;
+    word-break: break-word;
+  }
+
+  .contact-action {
+    margin-top: 0.65rem;
+    color: #7dd3fc;
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .booking-copy {
+    align-self: center;
+  }
+
+  .booking-benefits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.5rem;
+  }
+
+  .booking-benefits span {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(14, 116, 144, 0.14);
+    border-radius: 999px;
+    background: rgba(14, 165, 233, 0.08);
+    padding: 0.48rem 0.75rem;
+    color: #0f172a;
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+
+  .booking-form {
+    display: grid;
+    gap: 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.94)),
+      #f8fafc;
+    padding: 1.25rem;
+    box-shadow: 0 24px 70px rgba(15, 23, 42, 0.08);
+  }
+
+  .booking-submit {
+    display: inline-flex;
+    width: 100%;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 0;
+    border-radius: 8px;
+    background: #0ea5e9;
+    padding: 0.85rem 1.25rem;
+    color: #07162f;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition:
+      background-color 240ms ease,
+      box-shadow 240ms ease,
+      transform 240ms ease;
+  }
+
+  .booking-submit:hover {
+    background: #38bdf8;
+    box-shadow: 0 20px 44px rgba(14, 165, 233, 0.22);
+    transform: translateY(-2px);
+  }
+
+  .booking-submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+  }
+
+  @media (min-width: 640px) {
+    .contact-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .booking-form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 1.75rem;
+    }
+
+    .booking-submit {
+      grid-column: span 2 / span 2;
+    }
+  }
+
   .hero-shell {
     --spotlight-opacity: 0;
     --spotlight-x: 50%;

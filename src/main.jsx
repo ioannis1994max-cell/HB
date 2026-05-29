@@ -652,27 +652,71 @@ function FAQ() {
 }
 
 function Contact() {
+  const contactActions = [
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      value: "+357 96410472",
+      href: contact.whatsapp,
+      action: "Message us",
+    },
+    {
+      icon: Instagram,
+      label: "Instagram",
+      value: "@hapeshisb_marketing",
+      href: contact.instagram,
+      action: "View profile",
+    },
+    {
+      icon: Clock,
+      label: "Response",
+      value: "Mon - Sat, 9am - 7pm",
+      action: "We reply as soon as possible",
+    },
+  ];
+
   return (
     <section id="contact" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-          <SectionHeader
-            kicker="Contact"
-            title="Start with a conversation"
-            text="Send a message on WhatsApp, visit Instagram, or use the appointment form below."
-          />
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              [MessageCircle, "WhatsApp", "+357 96410472"],
-              [Instagram, "Instagram", "@hapeshisb_marketing"],
-              [Clock, "Hours", "Mon - Sat, 9am - 7pm"],
-            ].map(([Icon, label, value]) => (
-              <div key={label} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
-                <Icon className="h-5 w-5 text-sky-300" aria-hidden="true" />
-                <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-slate-200/50">{label}</p>
-                <p className="mt-2 text-lg font-bold text-white">{value}</p>
-              </div>
-            ))}
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <SectionHeader
+              kicker="Contact"
+              title="Let's build your online growth system"
+              text="Tell us what you need and we will guide you toward a practical next step for your website, AI automation, or marketing."
+            />
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button href="#book-appointment" icon={CalendarDays}>Book a Free Consultation</Button>
+              <Button href={contact.whatsapp} variant="secondary" icon={MessageCircle} target="_blank" rel="noreferrer">
+                WhatsApp
+              </Button>
+            </div>
+          </div>
+          <div className="contact-grid">
+            {contactActions.map(({ icon: Icon, label, value, href, action }) => {
+              const content = (
+                <>
+                  <div className="contact-icon" aria-hidden="true">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <p className="contact-label">{label}</p>
+                    <p className="contact-value">{value}</p>
+                    <p className="contact-action">{action}</p>
+                  </div>
+                </>
+              );
+
+              return href ? (
+                <a key={label} className="contact-card motion-card" href={href} target="_blank" rel="noreferrer">
+                  {content}
+                </a>
+              ) : (
+                <div key={label} className="contact-card motion-card">
+                  {content}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -697,7 +741,7 @@ function BookingForm() {
       setNotice(
         result.offline
           ? "Preview mode: add Supabase environment variables to save this request live."
-          : "Your request has been sent. We will contact you shortly."
+          : "Thanks. We will contact you shortly with a clear next step."
       );
     } catch (error) {
       setStatus("error");
@@ -708,12 +752,17 @@ function BookingForm() {
   return (
     <section id="book-appointment" className="reveal-on-scroll bg-white py-20 text-navy-950 sm:py-28">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
-        <div>
+        <div className="booking-copy">
           <p className="section-kicker text-sky-600">Book Appointment</p>
-          <h2 className="section-title text-navy-950">Book a free consultation</h2>
+          <h2 className="section-title text-navy-950">Book a Free Consultation</h2>
           <p className="mt-6 text-lg leading-8 text-slate-700">
-            Tell us what you want to improve. We will review your goals and suggest a clear next step for your website, automation, or marketing.
+            Tell us what you need. We will review your goals and suggest a clear next step for your website, automation, or marketing without pressure.
           </p>
+          <div className="booking-benefits" aria-label="Consultation benefits">
+            {["Short form", "Clear next step", "No pressure"].map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href={contact.whatsapp} variant="dark" icon={MessageCircle} target="_blank" rel="noreferrer">
               WhatsApp
@@ -724,7 +773,12 @@ function BookingForm() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="motion-card grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-5 sm:grid-cols-2 sm:p-7" aria-label="Appointment booking form">
+        <form onSubmit={handleSubmit} className="booking-form motion-card" aria-label="Appointment booking form">
+          <div className="sm:col-span-2">
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-sky-600">Tell us what you need</p>
+            <h3 className="mt-2 text-2xl font-black text-navy-950">Start with the essentials</h3>
+            <p className="mt-3 text-sm leading-7 text-slate-600">Share your contact details and the service you are interested in. Project details are optional.</p>
+          </div>
           <label className="hidden" aria-hidden="true">
             Company
             <input type="text" name="company" tabIndex="-1" autoComplete="off" />
@@ -748,20 +802,12 @@ function BookingForm() {
               {services.map(({ title }) => <option key={title}>{title}</option>)}
             </select>
           </label>
-          <label className="form-field">
-            <span>Preferred Date</span>
-            <input type="date" name="date" />
-          </label>
-          <label className="form-field">
-            <span>Preferred Time</span>
-            <input type="time" name="time" />
-          </label>
           <label className="form-field sm:col-span-2">
             <span>Project Details</span>
-            <textarea name="message" rows="5" placeholder="Tell us what you want to improve." />
+            <textarea name="message" rows="4" placeholder="Briefly tell us what you need. This is optional." />
           </label>
-          <button disabled={status === "sending"} type="submit" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-sky-500 px-5 text-sm font-black uppercase tracking-[0.13em] text-navy-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-70 sm:col-span-2">
-            {status === "sending" ? "Sending..." : "Send Request"}
+          <button disabled={status === "sending"} type="submit" className="booking-submit">
+            {status === "sending" ? "Sending..." : "Book a Free Consultation"}
             <CalendarDays className="h-4 w-4" aria-hidden="true" />
           </button>
           {notice ? (
