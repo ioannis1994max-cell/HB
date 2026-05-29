@@ -384,19 +384,31 @@ function Services() {
   return (
     <section id="services" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          kicker="Services"
-          title="A connected growth stack for modern businesses"
-          text="Choose one service or combine them into a practical system for your website, marketing, operations, and lead generation."
-        />
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <SectionHeader
+            kicker="Services"
+            title="A connected growth stack for modern businesses"
+            text="Choose one service or combine them into a practical system for your website, marketing, operations, and lead generation."
+          />
+          <p className="max-w-2xl text-sm leading-7 text-slate-200/60 lg:justify-self-end">
+            Each service is designed to work on its own or connect into a complete online growth system, from first impression to booked consultation.
+          </p>
+        </div>
+
+        <div className="services-grid mt-12">
           {services.map(({ title, text, icon: Icon }) => (
-            <article key={title} className="motion-card group rounded-lg border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-sky-300/40 hover:bg-white/[0.06]">
-              <div className="grid h-11 w-11 place-items-center rounded-md border border-sky-300/20 bg-sky-300/10 text-sky-200">
-                <Icon className="h-5 w-5" aria-hidden="true" />
+            <article key={title} className="service-card motion-card group">
+              <div className="service-card-top">
+                <div className="service-icon">
+                  <Icon className="h-6 w-6" aria-hidden="true" />
+                </div>
               </div>
-              <h3 className="mt-7 text-xl font-bold text-white">{title}</h3>
-              <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
+              <h3>{title}</h3>
+              <p>{text}</p>
+              <a href="#book-appointment" className="service-link" aria-label={`Learn more about ${title}`}>
+                Learn more
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
             </article>
           ))}
         </div>
