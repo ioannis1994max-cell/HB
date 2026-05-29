@@ -25,7 +25,6 @@ Add the real WhatsApp and Instagram details in `.env.local`:
 ```bash
 VITE_WHATSAPP_NUMBER=357XXXXXXXX
 VITE_INSTAGRAM_URL=https://instagram.com/hapeshisb_marketing
-VITE_CONTACT_EMAIL=hello@hapeshisbrothers.com
 ```
 
 ## Build
@@ -53,7 +52,6 @@ VITE_SUPABASE_ANON_KEY=your Supabase publishable key
 VITE_WHATSAPP_NUMBER=35796410472
 VITE_WHATSAPP_MESSAGE=Hello Hapeshis Brothers Agency, I would like to book a free consultation.
 VITE_INSTAGRAM_URL=https://instagram.com/hapeshisb_marketing
-VITE_CONTACT_EMAIL=hello@hapeshisbrothers.com
 ```
 
 ## Supabase

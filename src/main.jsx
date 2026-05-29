@@ -3,12 +3,9 @@ import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
   BadgeCheck,
-  BarChart3,
   CalendarDays,
   Clock,
-  Globe2,
   Instagram,
-  Mail,
   Megaphone,
   MessageCircle,
   MonitorSmartphone,
@@ -25,10 +22,10 @@ import "./styles.css";
 const navItems = ["Home", "Services", "About", "Contact"];
 
 const stats = [
-  ["Strategy", "Growth Planning"],
-  ["Creative", "Brand Systems"],
-  ["Launch", "Website Buildout"],
-  ["Support", "Clear Communication"],
+  ["Strategy", "Growth planning"],
+  ["Creative", "Premium brand systems"],
+  ["Launch", "Web and campaign setup"],
+  ["Support", "Clear communication"],
 ];
 
 const services = [
@@ -45,41 +42,17 @@ const reasons = [
   ["Trusted partnership", "Transparent reporting, clear communication, and practical growth advice."],
 ];
 
-const results = [
-  ["Lead Flow", "Mapped", "Clear next steps"],
-  ["Booking Path", "Ready", "Connected form"],
-  ["Campaigns", "Planned", "Channel strategy"],
-  ["Reporting", "Clear", "Simple updates"],
-];
-
-const qualitySignals = [
-  ["Website conversion", "Conversion-ready"],
-  ["Campaign health", "Launch-ready"],
-  ["Lead quality", "Qualified focus"],
+const agencyStack = [
+  ["Clear Offer", "Sharpen the message so visitors understand why to choose you."],
+  ["Premium Website", "Build a polished online presence that supports trust and bookings."],
+  ["Social Presence", "Create content direction for Instagram and client-facing channels."],
+  ["Booking Flow", "Connect forms, WhatsApp, and follow-up paths for smoother enquiries."],
 ];
 
 const processSteps = [
   ["Audit", "We map your current website, offer, audience, and lead flow."],
   ["Build", "We create the landing page, campaigns, tracking, and booking path."],
   ["Scale", "We improve what converts and move budget toward the strongest channels."],
-];
-
-const testimonials = [
-  [
-    "Our online presence now feels professional, clear, and much easier for clients to trust.",
-    "Dr. Andreas M.",
-    "Dental Clinic Owner",
-  ],
-  [
-    "They brought structure to our marketing and made the whole client journey feel more premium.",
-    "Maria K.",
-    "Aesthetic Clinic",
-  ],
-  [
-    "Best investment I have made in my business. Clean, professional, and they know exactly how to convert.",
-    "Yannis P.",
-    "Real Estate Pro",
-  ],
 ];
 
 function Logo() {
@@ -152,25 +125,19 @@ function HeroDashboard() {
               Live
             </span>
           </div>
-          <p className="mt-8 text-sm font-black uppercase tracking-[0.22em] text-white/50">Client Dashboard</p>
+          <p className="mt-8 text-sm font-black uppercase tracking-[0.22em] text-white/50">Agency Buildout</p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {results.map(([label, value, change]) => (
+            {agencyStack.map(([label, text]) => (
               <div key={label} className="rounded-sm border border-white/10 bg-white/[0.045] p-4 transition hover:border-signal/40">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
-                <p className="mt-3 text-3xl font-black tracking-normal text-white">{value}</p>
-                <p className="mt-1 text-sm font-bold text-emerald-300">{change}</p>
+                <p className="text-sm font-black uppercase tracking-[0.16em] text-white">{label}</p>
+                <p className="mt-3 text-sm leading-6 text-white/60">{text}</p>
               </div>
             ))}
           </div>
-          <div className="mt-6 space-y-3">
-            {qualitySignals.map(([label, status]) => (
-              <div key={label} className="rounded-sm border border-white/10 bg-white/[0.045] px-4 py-3">
-                <div className="flex justify-between gap-4 text-xs font-bold uppercase tracking-[0.14em] text-white/40">
-                  <span>{label}</span>
-                  <span className="text-emerald-300">{status}</span>
-                </div>
-              </div>
-            ))}
+          <div className="mt-6 rounded-sm border border-signal/30 bg-signal/10 p-4">
+            <p className="text-sm font-bold leading-6 text-white/70">
+              A focused digital setup for brands that want a stronger first impression and a cleaner path to enquiries.
+            </p>
           </div>
         </div>
       </div>
@@ -245,12 +212,11 @@ function Services() {
         </div>
 
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {services.map(([title, text, Icon], index) => (
+          {services.map(([title, text, Icon]) => (
             <article key={title} className="group rounded-sm border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-signal/50 hover:bg-white/[0.055]">
               <Icon className="h-7 w-7 text-ember" aria-hidden="true" />
               <h3 className="mt-8 text-xl font-bold text-white">{title}</h3>
               <p className="mt-4 text-sm leading-7 text-white/60">{text}</p>
-              <p className="mt-8 text-right text-sm font-black tracking-[0.26em] text-white/[0.22] transition group-hover:text-signal/70">0{index + 1}</p>
             </article>
           ))}
         </div>
@@ -261,15 +227,6 @@ function Services() {
         </div>
       </div>
     </section>
-  );
-}
-
-function MetricPill({ label, value }) {
-  return (
-    <div className="rounded-sm border border-white/10 bg-white/[0.055] p-4">
-      <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
-      <p className="mt-3 text-3xl font-black text-white">{value}</p>
-    </div>
   );
 }
 
@@ -301,24 +258,18 @@ function About() {
         <div className="rounded-sm border border-white/10 bg-white/[0.05] p-6 shadow-premium">
           <div className="flex items-center justify-between border-b border-white/10 pb-5">
             <div>
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/40">Client Dashboard</p>
-              <h3 className="mt-2 text-2xl font-black text-white">Growth Engine Live</h3>
+              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/40">What We Build</p>
+              <h3 className="mt-2 text-2xl font-black text-white">A cleaner online presence</h3>
             </div>
-            <BarChart3 className="h-8 w-8 text-ember" aria-hidden="true" />
+            <Sparkles className="h-8 w-8 text-ember" aria-hidden="true" />
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {results.map(([label, value, change]) => (
+            {agencyStack.map(([label, text]) => (
               <div key={label} className="rounded-sm bg-ink/70 p-5">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
-                <p className="mt-3 text-3xl font-black text-white">{value}</p>
-                <p className="mt-1 text-sm font-bold text-emerald-300">{change}</p>
+                <p className="mt-3 text-sm leading-7 text-white/62">{text}</p>
               </div>
             ))}
-          </div>
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <MetricPill label="Speed" value="Fast" />
-            <MetricPill label="Tracking" value="Live" />
-            <MetricPill label="Funnel" value="Ready" />
           </div>
         </div>
       </div>
@@ -339,42 +290,16 @@ function Process() {
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
-            {processSteps.map(([title, text], index) => (
+            {processSteps.map(([title, text]) => (
               <article key={title} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
                 <div className="mb-8 grid h-12 w-12 place-items-center rounded-sm bg-signal text-lg font-black text-white">
-                  {index + 1}
+                  <BadgeCheck className="h-6 w-6" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-black text-white">{title}</h3>
                 <p className="mt-4 text-sm leading-7 text-white/60">{text}</p>
               </article>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Testimonials() {
-  return (
-    <section className="bg-midnight py-20 text-white sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="section-kicker">Client Results</p>
-          <h2 className="section-title">Trusted by ambitious businesses</h2>
-          <p className="mt-5 text-lg leading-8 text-white/60">Real outcomes from real clients. We let the work speak.</p>
-        </div>
-
-        <div className="mt-12 grid gap-4 lg:grid-cols-3">
-          {testimonials.map(([quote, name, role]) => (
-            <figure key={name} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
-              <blockquote className="text-lg leading-8 text-white/70">"{quote}"</blockquote>
-              <figcaption className="mt-8 border-t border-white/10 pt-5">
-                <p className="font-black text-white">{name}</p>
-                <p className="mt-1 text-sm text-white/50">{role}</p>
-              </figcaption>
-            </figure>
-          ))}
         </div>
       </div>
     </section>
@@ -483,8 +408,8 @@ function Contact() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
-              [Mail, "Email", contact.email],
-              [Globe2, "Service Area", "Worldwide"],
+              [MessageCircle, "WhatsApp", "+357 96410472"],
+              [Instagram, "Instagram", "@hapeshisb_marketing"],
               [Clock, "Hours", "Mon - Sat, 9am - 7pm"],
             ].map(([Icon, label, value]) => (
               <div key={label} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
@@ -536,7 +461,6 @@ function App() {
         <Services />
         <About />
         <Process />
-        <Testimonials />
         <BookingForm />
         <Contact />
       </main>
