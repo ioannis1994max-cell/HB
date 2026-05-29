@@ -5,7 +5,6 @@ import {
   BadgeCheck,
   Bot,
   CalendarDays,
-  CheckCircle2,
   ChevronDown,
   Clock,
   Compass,
@@ -69,10 +68,31 @@ const workSteps = [
 ];
 
 const journey = [
-  ["Clarity", "Your offer becomes easier to understand."],
-  ["Presence", "Your website and social channels feel consistent and professional."],
-  ["Automation", "Common tasks and enquiries become easier to manage."],
-  ["Conversion", "Visitors have a clearer path to book a consultation or start a conversation."],
+  {
+    title: "Discovery Call",
+    text: "We learn your goals, audience, and current bottlenecks.",
+    icon: MessageCircle,
+  },
+  {
+    title: "Strategy",
+    text: "We shape the offer, user journey, and growth plan.",
+    icon: Compass,
+  },
+  {
+    title: "Website / AI Implementation",
+    text: "We build the site, automations, and lead flow.",
+    icon: Workflow,
+  },
+  {
+    title: "Marketing Launch",
+    text: "We launch campaigns around clear actions.",
+    icon: Megaphone,
+  },
+  {
+    title: "Business Growth",
+    text: "Your system supports stronger enquiries and follow-up.",
+    icon: Rocket,
+  },
 ];
 
 const projectTypes = [
@@ -450,15 +470,20 @@ function ResultsJourney() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Results Journey"
-          title="From scattered presence to a clearer growth system"
-          text="No invented metrics. The goal is real improvement in clarity, workflow, trust, and the path from visitor to conversation."
+          title="A clear path from first call to growth system"
+          text="A simple, practical journey that connects strategy, implementation, launch, and continuous business momentum."
         />
-        <div className="mt-12 grid gap-4 lg:grid-cols-4">
-          {journey.map(([title, text]) => (
-            <article key={title} className="motion-card rounded-lg border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.025))] p-6">
-              <CheckCircle2 className="h-6 w-6 text-sky-300" aria-hidden="true" />
-              <h3 className="mt-7 text-xl font-black text-white">{title}</h3>
-              <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
+        <div className="results-timeline" aria-label="Results journey timeline">
+          {journey.map(({ title, text, icon: Icon }, index) => (
+            <article key={title} className="timeline-step reveal-on-scroll" style={{ "--step-index": index + 1 }}>
+              <div className="timeline-marker" aria-hidden="true">
+                <Icon className="h-5 w-5" />
+              </div>
+              <div className="timeline-card motion-card">
+                <span className="timeline-index">{String(index + 1).padStart(2, "0")}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
             </article>
           ))}
         </div>
