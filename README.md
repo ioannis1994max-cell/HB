@@ -54,7 +54,6 @@ Add these environment variables in Vercel Project Settings:
 VITE_SUPABASE_URL=https://oiollhqidydvobmicfak.supabase.co
 VITE_SUPABASE_ANON_KEY=your Supabase publishable key
 VITE_WHATSAPP_NUMBER=35796410472
-VITE_WHATSAPP_MESSAGE=Hello Hapeshi Brothers Agency, I would like to book a free consultation.
 VITE_INSTAGRAM_URL=https://instagram.com/hapeshisb_marketing
 ```
 
