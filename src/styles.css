@@ -301,6 +301,201 @@
     }
   }
 
+  .projects-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .project-card {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    min-height: 280px;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(125, 211, 252, 0.14);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.022)),
+      rgba(8, 24, 52, 0.72);
+    padding: 1.25rem;
+  }
+
+  .project-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(56, 189, 248, 0.16), transparent 34%),
+      linear-gradient(135deg, rgba(56, 189, 248, 0.075), rgba(139, 92, 246, 0.09));
+    transition: opacity 320ms ease;
+  }
+
+  .project-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 1.25rem 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #38bdf8, #8b5cf6, transparent);
+    opacity: 0.42;
+    transform: scaleX(0.38);
+    transform-origin: left;
+    transition:
+      opacity 320ms ease,
+      transform 320ms ease;
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .project-card:hover::after {
+    opacity: 0.9;
+    transform: scaleX(1);
+  }
+
+  .project-card-muted {
+    border-color: rgba(167, 139, 250, 0.18);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.018)),
+      rgba(12, 24, 50, 0.58);
+  }
+
+  .project-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .project-status {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    border: 1px solid rgba(125, 211, 252, 0.18);
+    border-radius: 999px;
+    background: rgba(56, 189, 248, 0.09);
+    padding: 0.36rem 0.62rem;
+    color: #bae6fd;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    line-height: 1;
+  }
+
+  .project-icon {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(125, 211, 252, 0.18);
+    border-radius: 8px;
+    background: rgba(56, 189, 248, 0.09);
+    color: #bae6fd;
+    transition:
+      border-color 320ms ease,
+      color 320ms ease,
+      transform 320ms ease;
+  }
+
+  .project-card:hover .project-icon {
+    border-color: rgba(125, 211, 252, 0.36);
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .project-category {
+    margin-top: 1.5rem;
+    color: #7dd3fc;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .project-card h3 {
+    margin-top: 0.55rem;
+    color: #ffffff;
+    font-size: 1.16rem;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.28;
+  }
+
+  .project-card p {
+    margin-top: 0.85rem;
+    color: rgba(226, 232, 240, 0.66);
+    font-size: 0.93rem;
+    line-height: 1.72;
+  }
+
+  .project-points {
+    display: grid;
+    gap: 0.58rem;
+    margin-top: 1rem;
+    color: rgba(226, 232, 240, 0.74);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .project-points li {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .project-points li::before {
+    content: "";
+    width: 0.38rem;
+    height: 0.38rem;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.28);
+  }
+
+  .project-link,
+  .project-note {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: auto;
+    padding-top: 1.25rem;
+    color: #7dd3fc;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .project-link {
+    transition:
+      color 240ms ease,
+      gap 240ms ease;
+  }
+
+  .project-link:hover {
+    gap: 0.7rem;
+    color: #ffffff;
+  }
+
+  .project-note {
+    max-width: 16rem;
+    color: rgba(226, 232, 240, 0.58);
+    line-height: 1.65;
+  }
+
+  @media (min-width: 640px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   .results-timeline {
     position: relative;
     display: grid;

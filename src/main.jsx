@@ -96,10 +96,38 @@ const journey = [
 ];
 
 const projectTypes = [
-  ["Service Business Website", "A premium website for local companies that need trust, clarity, and lead capture."],
-  ["AI Workflow Setup", "Automation support for enquiries, internal tasks, and content operations."],
-  ["Campaign Landing Page", "A focused page for a service, offer, launch, or paid marketing campaign."],
-  ["Social Growth System", "A content and messaging foundation for consistent visibility online."],
+  {
+    status: "Example project",
+    title: "Local Service Website System",
+    category: "Website Development",
+    text: "A polished website structure for a local service business that needs clearer services, trust signals, and a direct booking path.",
+    points: ["Mobile-first service pages", "Contact and appointment flow"],
+    icon: MonitorSmartphone,
+  },
+  {
+    status: "Example project",
+    title: "AI Lead Handling Workflow",
+    category: "AI Automation",
+    text: "A practical automation setup for capturing enquiries, organizing follow-up, and reducing repeated admin work.",
+    points: ["Lead intake structure", "Follow-up workflow support"],
+    icon: Bot,
+  },
+  {
+    status: "Example project",
+    title: "Campaign Landing Page",
+    category: "Marketing Strategy",
+    text: "A focused page for a new offer, service, or launch with clear messaging and one primary conversion action.",
+    points: ["Offer-focused page copy", "Conversion-focused layout"],
+    icon: LayoutDashboard,
+  },
+  {
+    status: "Coming soon",
+    title: "Published Client Work",
+    category: "Approved case studies",
+    text: "Real client projects will be added here once Hapeshi Brothers Agency has permission to publish the work.",
+    points: ["Only approved client logos", "Only verified outcomes"],
+    icon: Sparkles,
+  },
 ];
 
 const reasons = [
@@ -497,17 +525,41 @@ function Projects() {
     <section id="projects" className="reveal-on-scroll bg-navy-900 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <SectionHeader
-            kicker="Portfolio / Projects"
-            title="Project tracks we can build with you"
-            text="Rather than showing invented case studies, this section shows the types of work Hapeshi Brothers Agency can create for your business."
-          />
-          <div className="grid gap-4 sm:grid-cols-2">
-            {projectTypes.map(([title, text]) => (
-              <article key={title} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
-                <LayoutDashboard className="h-6 w-6 text-violet-200" aria-hidden="true" />
-                <h3 className="mt-7 text-xl font-black text-white">{title}</h3>
-                <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
+          <div>
+            <SectionHeader
+              kicker="Portfolio / Projects"
+              title="Honest project examples, ready for real case studies"
+              text="No client case studies are published yet. These examples show the type of work Hapeshi Brothers Agency can build while clearly separating placeholders from real client work."
+            />
+            <div className="mt-8 rounded-lg border border-sky-300/15 bg-sky-300/[0.055] p-5 text-sm leading-7 text-slate-200/70">
+              Real project names, client logos, and outcomes will be added only when they are approved to publish.
+            </div>
+          </div>
+          <div className="projects-grid">
+            {projectTypes.map(({ status, title, category, text, points, icon: Icon }) => (
+              <article key={title} className={`project-card motion-card ${status === "Coming soon" ? "project-card-muted" : ""}`}>
+                <div className="project-card-header">
+                  <span className="project-status">{status}</span>
+                  <div className="project-icon" aria-hidden="true">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                </div>
+                <span className="project-category">{category}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <ul className="project-points" aria-label={`${title} details`}>
+                  {points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                {status === "Coming soon" ? (
+                  <span className="project-note">Placeholder until approved real work is available.</span>
+                ) : (
+                  <a className="project-link" href="#book-appointment">
+                    Discuss this project type
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
               </article>
             ))}
           </div>
