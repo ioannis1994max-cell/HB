@@ -168,30 +168,86 @@ function Header() {
 }
 
 function HeroVisual() {
+  const flowPaths = [
+    "M126 168 C216 148 286 174 356 266",
+    "M360 102 C430 154 432 216 368 266",
+    "M126 392 C226 394 298 344 356 286",
+    "M374 278 C452 234 524 238 594 290",
+  ];
+
   return (
-    <div className="hero-visual" aria-hidden="true">
+    <div
+      className="hero-visual"
+      role="img"
+      aria-label="Animated system map showing website development, AI automation, and marketing flowing into business growth"
+    >
       <div className="hero-grid" />
-      <div className="hero-orbit hero-orbit-one" />
-      <div className="hero-orbit hero-orbit-two" />
+      <svg className="hero-flow-svg" viewBox="0 0 720 560" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="heroFlowLine" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.16" />
+            <stop offset="48%" stopColor="#7dd3fc" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.72" />
+          </linearGradient>
+          <filter id="heroLineGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <marker id="heroArrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <path d="M0 0 L9 4.5 L0 9 Z" fill="#7dd3fc" opacity="0.9" />
+          </marker>
+        </defs>
+        <path className="flow-halo" d="M118 168 C216 112 306 148 364 262 C430 152 520 206 596 290 C506 380 374 420 126 392" />
+        {flowPaths.map((path, index) => (
+          <g key={path}>
+            <path className="flow-line-base" d={path} markerEnd={index === 3 ? "url(#heroArrow)" : undefined} />
+            <path className={`flow-line-active flow-line-${index + 1}`} d={path} markerEnd={index === 3 ? "url(#heroArrow)" : undefined} />
+          </g>
+        ))}
+      </svg>
       <div className="hero-core">
         <Sparkles className="h-7 w-7 text-sky-200" />
         <span>HB Growth System</span>
+        <small>Tech + AI + Marketing</small>
       </div>
       <div className="hero-node node-web">
-        <MonitorSmartphone className="h-5 w-5" />
-        <span>Web</span>
+        <span className="hero-node-icon">
+          <MonitorSmartphone className="h-5 w-5" />
+        </span>
+        <span>
+          <strong>Website</strong>
+          <small>Development</small>
+        </span>
       </div>
       <div className="hero-node node-ai">
-        <Bot className="h-5 w-5" />
-        <span>AI</span>
+        <span className="hero-node-icon">
+          <Bot className="h-5 w-5" />
+        </span>
+        <span>
+          <strong>AI</strong>
+          <small>Automation</small>
+        </span>
       </div>
       <div className="hero-node node-marketing">
-        <Megaphone className="h-5 w-5" />
-        <span>Marketing</span>
+        <span className="hero-node-icon">
+          <Megaphone className="h-5 w-5" />
+        </span>
+        <span>
+          <strong>Marketing</strong>
+          <small>Campaigns</small>
+        </span>
       </div>
-      <div className="hero-node node-leads">
-        <MessageCircle className="h-5 w-5" />
-        <span>Leads</span>
+      <div className="hero-node node-growth">
+        <span className="hero-node-icon">
+          <Rocket className="h-5 w-5" />
+        </span>
+        <span>
+          <strong>Business</strong>
+          <small>Growth</small>
+        </span>
       </div>
     </div>
   );
