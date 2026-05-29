@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
@@ -95,6 +95,97 @@ const faqs = [
   ["How do consultations work?", "Send the booking form or message us on WhatsApp. We will review your goals and suggest the clearest next step."],
 ];
 
+function usePremiumMotion() {
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+      return undefined;
+    }
+
+    const root = document.documentElement;
+    const hero = document.querySelector(".hero-shell");
+    const revealElements = Array.from(document.querySelectorAll(".reveal-on-scroll"));
+    let pointerFrame = 0;
+    let scrollFrame = 0;
+
+    root.classList.add("motion-ready");
+
+    revealElements.forEach((element, index) => {
+      element.style.setProperty("--reveal-delay", `${Math.min((index % 6) * 60, 240)}ms`);
+    });
+
+    const revealObserver =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  revealObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "0px 0px -8% 0px", threshold: 0.14 }
+          )
+        : null;
+
+    if (revealObserver) {
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+
+    function handlePointerMove(event) {
+      if (!hero) {
+        return;
+      }
+
+      if (pointerFrame) {
+        window.cancelAnimationFrame(pointerFrame);
+      }
+
+      pointerFrame = window.requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        hero.style.setProperty("--spotlight-x", `${event.clientX - rect.left}px`);
+        hero.style.setProperty("--spotlight-y", `${event.clientY - rect.top}px`);
+        hero.style.setProperty("--spotlight-opacity", "1");
+        pointerFrame = 0;
+      });
+    }
+
+    function handlePointerLeave() {
+      hero?.style.setProperty("--spotlight-opacity", "0");
+    }
+
+    function handleScroll() {
+      if (scrollFrame) {
+        return;
+      }
+
+      scrollFrame = window.requestAnimationFrame(() => {
+        root.style.setProperty("--hero-parallax", `${Math.min(window.scrollY * 0.035, 24)}px`);
+        scrollFrame = 0;
+      });
+    }
+
+    hero?.addEventListener("pointermove", handlePointerMove);
+    hero?.addEventListener("pointerleave", handlePointerLeave);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      root.classList.remove("motion-ready");
+      revealObserver?.disconnect();
+      hero?.removeEventListener("pointermove", handlePointerMove);
+      hero?.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("scroll", handleScroll);
+      window.cancelAnimationFrame(pointerFrame);
+      window.cancelAnimationFrame(scrollFrame);
+    };
+  }, []);
+}
+
 function Logo() {
   return (
     <a href="#home" className="group flex items-center gap-3" aria-label="Hapeshi Brothers Agency home">
@@ -120,7 +211,7 @@ function Button({ href, children, variant = "primary", icon: Icon = ArrowRight, 
     <a
       href={href}
       {...props}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-black uppercase tracking-[0.11em] transition ${classes[variant]}`}
+      className={`premium-button inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-black uppercase tracking-[0.11em] transition ${classes[variant]}`}
     >
       {children}
       {Icon ? <Icon className="h-4 w-4" aria-hidden="true" /> : null}
@@ -177,7 +268,7 @@ function HeroVisual() {
 
   return (
     <div
-      className="hero-visual"
+      className="hero-visual reveal-on-scroll"
       role="img"
       aria-label="Animated system map showing website development, AI automation, and marketing flowing into business growth"
     >
@@ -255,10 +346,11 @@ function HeroVisual() {
 
 function Hero() {
   return (
-    <section id="home" className="relative isolate overflow-hidden bg-navy-950 pt-36 text-white xl:pt-28">
+    <section id="home" className="hero-shell relative isolate overflow-hidden bg-navy-950 pt-36 text-white xl:pt-28">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(56,189,248,0.24),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.2),transparent_32%),linear-gradient(180deg,#07162f_0%,#0b1733_55%,#0f1f3d_100%)]" />
+      <div className="hero-spotlight" aria-hidden="true" />
       <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
-        <div>
+        <div className="reveal-on-scroll">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
             <Sparkles className="h-4 w-4 text-sky-300" aria-hidden="true" />
             AI, marketing and web development
@@ -290,7 +382,7 @@ function Hero() {
 
 function Services() {
   return (
-    <section id="services" className="bg-slate-950 py-20 text-white sm:py-28">
+    <section id="services" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Services"
@@ -299,7 +391,7 @@ function Services() {
         />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {services.map(({ title, text, icon: Icon }) => (
-            <article key={title} className="group rounded-lg border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-sky-300/40 hover:bg-white/[0.06]">
+            <article key={title} className="motion-card group rounded-lg border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-sky-300/40 hover:bg-white/[0.06]">
               <div className="grid h-11 w-11 place-items-center rounded-md border border-sky-300/20 bg-sky-300/10 text-sky-200">
                 <Icon className="h-5 w-5" aria-hidden="true" />
               </div>
@@ -315,7 +407,7 @@ function Services() {
 
 function HowWeWork() {
   return (
-    <section id="how-we-work" className="bg-navy-900 py-20 text-white sm:py-28">
+    <section id="how-we-work" className="reveal-on-scroll bg-navy-900 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeader
@@ -325,7 +417,7 @@ function HowWeWork() {
           />
           <div className="grid gap-4 md:grid-cols-2">
             {workSteps.map(([title, text]) => (
-              <article key={title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <article key={title} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
                 <div className="mb-7 grid h-11 w-11 place-items-center rounded-md bg-sky-300/10 text-sky-200">
                   <Workflow className="h-5 w-5" aria-hidden="true" />
                 </div>
@@ -342,7 +434,7 @@ function HowWeWork() {
 
 function ResultsJourney() {
   return (
-    <section id="results" className="bg-slate-950 py-20 text-white sm:py-28">
+    <section id="results" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeader
           kicker="Results Journey"
@@ -351,7 +443,7 @@ function ResultsJourney() {
         />
         <div className="mt-12 grid gap-4 lg:grid-cols-4">
           {journey.map(([title, text]) => (
-            <article key={title} className="rounded-lg border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.025))] p-6">
+            <article key={title} className="motion-card rounded-lg border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.025))] p-6">
               <CheckCircle2 className="h-6 w-6 text-sky-300" aria-hidden="true" />
               <h3 className="mt-7 text-xl font-black text-white">{title}</h3>
               <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
@@ -365,7 +457,7 @@ function ResultsJourney() {
 
 function Projects() {
   return (
-    <section id="projects" className="bg-navy-900 py-20 text-white sm:py-28">
+    <section id="projects" className="reveal-on-scroll bg-navy-900 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <SectionHeader
@@ -375,7 +467,7 @@ function Projects() {
           />
           <div className="grid gap-4 sm:grid-cols-2">
             {projectTypes.map(([title, text]) => (
-              <article key={title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <article key={title} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
                 <LayoutDashboard className="h-6 w-6 text-violet-200" aria-hidden="true" />
                 <h3 className="mt-7 text-xl font-black text-white">{title}</h3>
                 <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
@@ -390,7 +482,7 @@ function Projects() {
 
 function WhyChooseUs() {
   return (
-    <section id="about" className="bg-slate-950 py-20 text-white sm:py-28">
+    <section id="about" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
         <SectionHeader
           kicker="Why Choose Us"
@@ -399,7 +491,7 @@ function WhyChooseUs() {
         />
         <div className="space-y-4">
           {reasons.map(([title, text]) => (
-            <article key={title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+            <article key={title} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
               <div className="flex items-start gap-4">
                 <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-sky-300" aria-hidden="true" />
                 <div>
@@ -417,12 +509,12 @@ function WhyChooseUs() {
 
 function FAQ() {
   return (
-    <section id="faq" className="bg-navy-900 py-20 text-white sm:py-28">
+    <section id="faq" className="reveal-on-scroll bg-navy-900 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <SectionHeader kicker="FAQ" title="Questions before you book" text="A few simple answers before we talk about your business." />
         <div className="mt-10 divide-y divide-white/10 rounded-lg border border-white/10 bg-white/[0.04]">
           {faqs.map(([question, answer]) => (
-            <details key={question} className="group p-6">
+            <details key={question} className="motion-card group p-6">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-left text-lg font-bold text-white">
                 {question}
                 <ChevronDown className="h-5 w-5 shrink-0 text-sky-300 transition group-open:rotate-180" aria-hidden="true" />
@@ -438,7 +530,7 @@ function FAQ() {
 
 function Contact() {
   return (
-    <section id="contact" className="bg-slate-950 py-20 text-white sm:py-28">
+    <section id="contact" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
           <SectionHeader
@@ -452,7 +544,7 @@ function Contact() {
               [Instagram, "Instagram", "@hapeshisb_marketing"],
               [Clock, "Hours", "Mon - Sat, 9am - 7pm"],
             ].map(([Icon, label, value]) => (
-              <div key={label} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div key={label} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
                 <Icon className="h-5 w-5 text-sky-300" aria-hidden="true" />
                 <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-slate-200/50">{label}</p>
                 <p className="mt-2 text-lg font-bold text-white">{value}</p>
@@ -491,7 +583,7 @@ function BookingForm() {
   }
 
   return (
-    <section id="book-appointment" className="bg-white py-20 text-navy-950 sm:py-28">
+    <section id="book-appointment" className="reveal-on-scroll bg-white py-20 text-navy-950 sm:py-28">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <div>
           <p className="section-kicker text-sky-600">Book Appointment</p>
@@ -509,7 +601,7 @@ function BookingForm() {
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-5 sm:grid-cols-2 sm:p-7" aria-label="Appointment booking form">
+        <form onSubmit={handleSubmit} className="motion-card grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-5 sm:grid-cols-2 sm:p-7" aria-label="Appointment booking form">
           <label className="hidden" aria-hidden="true">
             Company
             <input type="text" name="company" tabIndex="-1" autoComplete="off" />
@@ -588,6 +680,8 @@ function Footer() {
 }
 
 function App() {
+  usePremiumMotion();
+
   return (
     <>
       <Header />
