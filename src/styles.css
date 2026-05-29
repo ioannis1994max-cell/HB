@@ -16,6 +16,7 @@
 
   body {
     margin: 0;
+    overflow-x: hidden;
     --hero-parallax: 0px;
     --spotlight-opacity: 0;
     --spotlight-x: 50%;
@@ -149,6 +150,11 @@
 
   .hero-layout {
     min-height: 760px;
+  }
+
+  .hero-eyebrow {
+    max-width: 100%;
+    text-wrap: balance;
   }
 
   .contact-grid {
@@ -1313,6 +1319,17 @@
   }
 
   @media (max-width: 640px) {
+    body {
+      overflow-x: hidden;
+    }
+
+    .hero-shell,
+    .hero-layout,
+    .hero-layout > *,
+    .section-title {
+      max-width: 100%;
+    }
+
     .section-kicker {
       margin-bottom: 0.85rem;
       letter-spacing: 0.16em;
@@ -1321,6 +1338,7 @@
     .section-title {
       font-size: 2rem;
       line-height: 1.12;
+      overflow-wrap: anywhere;
     }
 
     .section-title::after {
@@ -1336,6 +1354,20 @@
     .hero-layout {
       min-height: auto;
       gap: 2.25rem;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      max-width: 100%;
+      white-space: normal;
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      line-height: 1.35;
+    }
+
+    .hero-shell h1 {
+      max-width: 100%;
+      overflow-wrap: anywhere;
     }
 
     .premium-button {

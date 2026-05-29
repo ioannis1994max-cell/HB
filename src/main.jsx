@@ -266,12 +266,12 @@ function usePremiumMotion() {
 
 function Logo() {
   return (
-    <a href="#home" className="group flex items-center gap-3" aria-label="Hapeshi Brothers Agency home">
+    <a href="#home" className="group flex min-w-0 items-center gap-3" aria-label="Hapeshi Brothers Agency home">
       <span className="grid h-11 w-11 place-items-center rounded-md border border-sky-300/25 bg-sky-300/10 text-base font-black text-white shadow-blue">
         HB
       </span>
-      <span className="leading-tight">
-        <span className="block text-sm font-black uppercase tracking-[0.14em] text-white">Hapeshi Brothers</span>
+      <span className="min-w-0 leading-tight">
+        <span className="block truncate text-sm font-black uppercase tracking-[0.14em] text-white">Hapeshi Brothers</span>
         <span className="block text-xs uppercase tracking-[0.18em] text-sky-100/60">Agency</span>
       </span>
     </a>
@@ -327,7 +327,7 @@ function Header() {
         </div>
         <button
           type="button"
-          className="mobile-menu-toggle xl:hidden"
+          className="mobile-menu-toggle ml-auto xl:hidden"
           aria-expanded={isMenuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setIsMenuOpen((current) => !current)}
@@ -442,7 +442,7 @@ function Hero() {
       <div className="hero-spotlight" aria-hidden="true" />
       <div className="hero-layout mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-8 sm:px-6 sm:pb-16 sm:pt-12 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
         <div className="reveal-on-scroll">
-          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
+          <p className="hero-eyebrow mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
             <Sparkles className="h-4 w-4 text-sky-300" aria-hidden="true" />
             AI, marketing and web development
           </p>
