@@ -25,10 +25,10 @@ import "./styles.css";
 const navItems = ["Home", "Services", "About", "Contact"];
 
 const stats = [
-  ["120+", "Businesses Scaled"],
-  ["8x", "Avg. ROI on Ads"],
-  ["24h", "Project Kickoff"],
-  ["100%", "Results Focused"],
+  ["Strategy", "Growth Planning"],
+  ["Creative", "Brand Systems"],
+  ["Launch", "Website Buildout"],
+  ["Support", "Clear Communication"],
 ];
 
 const services = [
@@ -46,10 +46,16 @@ const reasons = [
 ];
 
 const results = [
-  ["Leads (30d)", "+312", "+48%"],
-  ["Bookings", "184", "+62%"],
-  ["Ad Spend", "EUR 4.2k", "Efficient"],
-  ["Revenue", "EUR 38k", "+9.1x"],
+  ["Lead Flow", "Mapped", "Clear next steps"],
+  ["Booking Path", "Ready", "Connected form"],
+  ["Campaigns", "Planned", "Channel strategy"],
+  ["Reporting", "Clear", "Simple updates"],
+];
+
+const qualitySignals = [
+  ["Website conversion", "Conversion-ready"],
+  ["Campaign health", "Launch-ready"],
+  ["Lead quality", "Qualified focus"],
 ];
 
 const processSteps = [
@@ -60,12 +66,12 @@ const processSteps = [
 
 const testimonials = [
   [
-    "Our calendar is fully booked 3 weeks ahead. The team rebuilt our entire online presence and the patients have not stopped coming.",
+    "Our online presence now feels professional, clear, and much easier for clients to trust.",
     "Dr. Andreas M.",
     "Dental Clinic Owner",
   ],
   [
-    "Within 30 days we tripled our consultations. They do not just deliver marketing, they deliver clients.",
+    "They brought structure to our marketing and made the whole client journey feel more premium.",
     "Maria K.",
     "Aesthetic Clinic",
   ],
@@ -157,18 +163,11 @@ function HeroDashboard() {
             ))}
           </div>
           <div className="mt-6 space-y-3">
-            {[
-              ["Website conversion", "86%"],
-              ["Campaign health", "92%"],
-              ["Lead quality", "78%"],
-            ].map(([label, width]) => (
-              <div key={label}>
-                <div className="mb-2 flex justify-between text-xs font-bold uppercase tracking-[0.14em] text-white/40">
+            {qualitySignals.map(([label, status]) => (
+              <div key={label} className="rounded-sm border border-white/10 bg-white/[0.045] px-4 py-3">
+                <div className="flex justify-between gap-4 text-xs font-bold uppercase tracking-[0.14em] text-white/40">
                   <span>{label}</span>
-                  <span>{width}</span>
-                </div>
-                <div className="h-2 rounded-full bg-white/10">
-                  <div className="h-2 rounded-full bg-gradient-to-r from-signal to-ember" style={{ width }} />
+                  <span className="text-emerald-300">{status}</span>
                 </div>
               </div>
             ))}
@@ -257,7 +256,7 @@ function Services() {
         </div>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-sm border border-signal/30 bg-signal/10 p-6 sm:flex-row sm:items-center">
-          <p className="max-w-2xl text-lg font-semibold text-white">Ready to grow? Book a free 20-minute strategy call. No pressure, just clarity.</p>
+          <p className="max-w-2xl text-lg font-semibold text-white">Ready to grow? Book a free strategy call. No pressure, just clarity.</p>
           <Button href="#book-appointment">Book a Free Call</Button>
         </div>
       </div>
@@ -317,7 +316,7 @@ function About() {
             ))}
           </div>
           <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            <MetricPill label="Speed" value="A+" />
+            <MetricPill label="Speed" value="Fast" />
             <MetricPill label="Tracking" value="Live" />
             <MetricPill label="Funnel" value="Ready" />
           </div>
@@ -412,7 +411,7 @@ function BookingForm() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <div>
           <p className="section-kicker text-signal">Book Appointment</p>
-          <h2 className="section-title text-ink">Your next 30 days could change everything.</h2>
+          <h2 className="section-title text-ink">Your next move could change everything.</h2>
           <p className="mt-6 text-lg leading-8 text-black/60">
             Book a free strategy call and we will show you exactly how to get more clients, whether you work with us or not.
           </p>
