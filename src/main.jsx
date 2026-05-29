@@ -8,6 +8,7 @@ import {
   ChevronDown,
   Clock,
   Compass,
+  Globe2,
   Instagram,
   LayoutDashboard,
   Megaphone,
@@ -131,9 +132,36 @@ const projectTypes = [
 ];
 
 const reasons = [
-  ["Modern and practical", "We focus on useful systems that make your business easier to find, understand, and contact."],
-  ["Built for business owners", "The website, content, and automations are designed around real day-to-day operations."],
-  ["Clean communication", "You get direct guidance, simple priorities, and a build that is easy to keep improving."],
+  {
+    title: "Websites built for conversion",
+    text: "Clear pages, strong calls to action, and mobile-first layouts designed to turn interest into enquiries.",
+    icon: MonitorSmartphone,
+  },
+  {
+    title: "AI tools that save time",
+    text: "Practical automations for lead handling, admin tasks, content support, and repeatable business workflows.",
+    icon: Bot,
+  },
+  {
+    title: "Marketing systems for growth",
+    text: "Messaging, content direction, and campaign foundations that help your business show up with purpose.",
+    icon: Megaphone,
+  },
+  {
+    title: "Clear communication",
+    text: "Simple priorities, honest recommendations, and direct updates so you always know what is being built and why.",
+    icon: MessageCircle,
+  },
+  {
+    title: "Scalable for Cyprus, Greece, and global clients",
+    text: "Flexible websites and systems that can support local service businesses, startups, and international audiences.",
+    icon: Globe2,
+  },
+  {
+    title: "Clean design and strong user experience",
+    text: "Premium visuals, readable content, and smooth interactions that make your brand feel trustworthy and easy to use.",
+    icon: Sparkles,
+  },
 ];
 
 const faqs = [
@@ -573,20 +601,26 @@ function WhyChooseUs() {
   return (
     <section id="about" className="reveal-on-scroll bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
-        <SectionHeader
-          kicker="Why Choose Us"
-          title="Premium execution without the noise"
-          text="Hapeshi Brothers Agency combines web development, AI automation, and marketing thinking into one clean, practical build."
-        />
-        <div className="space-y-4">
-          {reasons.map(([title, text]) => (
-            <article key={title} className="motion-card rounded-lg border border-white/10 bg-white/[0.04] p-6">
-              <div className="flex items-start gap-4">
-                <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-sky-300" aria-hidden="true" />
-                <div>
-                  <h3 className="font-bold text-white">{title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-200/60">{text}</p>
-                </div>
+        <div>
+          <SectionHeader
+            kicker="Why Choose Us"
+            title="Trust built through clarity, not exaggeration"
+            text="Hapeshi Brothers Agency focuses on practical systems, clean design, and clear communication so clients understand exactly what is being created."
+          />
+          <div className="why-note">
+            <ShieldCheck className="h-5 w-5 text-sky-300" aria-hidden="true" />
+            <p>No fake statistics, inflated client numbers, or invented awards. Just honest work designed to help your business look better, respond faster, and grow with more structure.</p>
+          </div>
+        </div>
+        <div className="why-grid">
+          {reasons.map(({ title, text, icon: Icon }) => (
+            <article key={title} className="why-card motion-card">
+              <div className="why-icon" aria-hidden="true">
+                <Icon className="h-5 w-5" />
+              </div>
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
               </div>
             </article>
           ))}
