@@ -530,10 +530,11 @@
   .service-link {
     display: inline-flex;
     width: fit-content;
+    min-height: 2.75rem;
     align-items: center;
     gap: 0.45rem;
     margin-top: auto;
-    padding-top: 1.3rem;
+    padding: 1.05rem 0.25rem 0 0;
     color: #7dd3fc;
     font-size: 0.74rem;
     font-weight: 900;
@@ -745,6 +746,8 @@
   }
 
   .project-link {
+    min-height: 2.75rem;
+    padding-right: 0.25rem;
     transition:
       color 240ms ease,
       gap 240ms ease;
