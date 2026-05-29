@@ -4,17 +4,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        midnight: "#061328",
-        ink: "#050608",
-        steel: "#0c2342",
-        signal: "#cf2438",
-        ember: "#ff4157",
+        midnight: "#0b1733",
+        ink: "#07162f",
+        steel: "#162a4f",
+        signal: "#38bdf8",
+        ember: "#8b5cf6",
+        navy: {
+          900: "#0b1733",
+          950: "#07162f",
+        },
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        premium: "0 24px 80px rgba(0, 0, 0, 0.35)",
+        premium: "0 24px 80px rgba(5, 15, 35, 0.35)",
+        blue: "0 24px 80px rgba(56, 189, 248, 0.18)",
       },
     },
   },

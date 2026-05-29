@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,47 +16,183 @@
   body {
     margin: 0;
     background:
-      linear-gradient(180deg, rgba(207, 36, 56, 0.08), transparent 28rem),
-      #050608;
+      radial-gradient(circle at 20% 0%, rgba(56, 189, 248, 0.16), transparent 30rem),
+      radial-gradient(circle at 85% 10%, rgba(139, 92, 246, 0.14), transparent 28rem),
+      #07162f;
     color: #ffffff;
     font-family: Inter, ui-sans-serif, system-ui, sans-serif;
   }
 
   ::selection {
-    background: #cf2438;
-    color: #ffffff;
+    background: #38bdf8;
+    color: #07162f;
   }
 }
 
 @layer components {
   .section-kicker {
-    @apply mb-4 text-xs font-black uppercase tracking-[0.22em] text-ember;
+    @apply mb-4 text-xs font-black uppercase tracking-[0.2em] text-sky-300;
   }
 
   .section-title {
-    @apply text-4xl font-black leading-tight tracking-normal text-white sm:text-5xl;
+    @apply text-4xl font-black leading-tight tracking-normal sm:text-5xl;
   }
 
   .section-title::after {
     content: "";
     display: block;
-    width: 72px;
+    width: 76px;
     height: 3px;
     margin-top: 22px;
-    background: linear-gradient(90deg, #cf2438, rgba(255, 65, 87, 0));
+    border-radius: 999px;
+    background: linear-gradient(90deg, #38bdf8, rgba(139, 92, 246, 0));
   }
 
   .form-field {
-    @apply grid gap-2 text-xs font-black uppercase tracking-[0.16em] text-black/60;
+    @apply grid gap-2 text-xs font-black uppercase tracking-[0.15em] text-slate-600;
   }
 
   .form-field input,
   .form-field select,
   .form-field textarea {
-    @apply w-full border border-black/10 bg-white px-4 py-3 text-base font-semibold normal-case tracking-normal text-ink outline-none transition placeholder:text-black/40 focus:border-signal focus:ring-4 focus:ring-signal/10;
+    @apply w-full rounded-md border border-slate-200 bg-white px-4 py-3 text-base font-semibold normal-case tracking-normal text-navy-950 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-400/15;
   }
 
   .social-button {
-    @apply grid h-12 w-12 place-items-center rounded-sm text-white shadow-premium transition hover:-translate-y-1;
+    @apply grid h-12 w-12 place-items-center rounded-md text-white shadow-blue transition hover:-translate-y-1;
+  }
+
+  .hero-visual {
+    position: relative;
+    min-height: 560px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(56, 189, 248, 0.2), transparent 13rem),
+      radial-gradient(circle at 70% 25%, rgba(139, 92, 246, 0.2), transparent 12rem),
+      linear-gradient(145deg, rgba(15, 31, 61, 0.9), rgba(7, 22, 47, 0.92));
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.22);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(circle at center, black, transparent 74%);
+  }
+
+  .hero-core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 2;
+    display: grid;
+    width: min(220px, 44vw);
+    aspect-ratio: 1;
+    place-items: center;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(125, 211, 252, 0.32);
+    border-radius: 999px;
+    background:
+      radial-gradient(circle at 50% 35%, rgba(125, 211, 252, 0.22), transparent 45%),
+      rgba(8, 24, 52, 0.78);
+    text-align: center;
+    color: white;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    box-shadow: inset 0 0 40px rgba(56, 189, 248, 0.12), 0 20px 70px rgba(56, 189, 248, 0.18);
+  }
+
+  .hero-core span {
+    display: block;
+    max-width: 130px;
+    font-size: 0.88rem;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .hero-orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 1px solid rgba(125, 211, 252, 0.16);
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-orbit-one {
+    width: min(390px, 78vw);
+    aspect-ratio: 1;
+    animation: spin-slow 22s linear infinite;
+  }
+
+  .hero-orbit-two {
+    width: min(500px, 94vw);
+    aspect-ratio: 1;
+    border-color: rgba(167, 139, 250, 0.14);
+    animation: spin-slow 30s linear infinite reverse;
+  }
+
+  .hero-node {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 999px;
+    background: rgba(15, 31, 61, 0.86);
+    padding: 0.75rem 1rem;
+    color: #e0f2fe;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+    animation: float-soft 5s ease-in-out infinite;
+  }
+
+  .node-web {
+    left: 11%;
+    top: 20%;
+  }
+
+  .node-ai {
+    right: 10%;
+    top: 24%;
+    animation-delay: -1.2s;
+  }
+
+  .node-marketing {
+    left: 10%;
+    bottom: 19%;
+    animation-delay: -2.4s;
+  }
+
+  .node-leads {
+    right: 11%;
+    bottom: 18%;
+    animation-delay: -3.2s;
+  }
+
+}
+
+@keyframes spin-slow {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }

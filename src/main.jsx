@@ -3,67 +3,107 @@ import { createRoot } from "react-dom/client";
 import {
   ArrowRight,
   BadgeCheck,
+  Bot,
   CalendarDays,
+  CheckCircle2,
+  ChevronDown,
   Clock,
+  Compass,
   Instagram,
+  LayoutDashboard,
   Megaphone,
   MessageCircle,
   MonitorSmartphone,
-  PenTool,
-  Search,
+  Rocket,
   ShieldCheck,
   Sparkles,
-  Users,
+  Workflow,
 } from "lucide-react";
 import { submitBookingRequest } from "./lib/bookings";
 import { contact } from "./config/contact";
 import "./styles.css";
 
-const navItems = ["Home", "Services", "About", "Contact"];
-
-const stats = [
-  ["Strategy", "Growth planning"],
-  ["Creative", "Premium brand systems"],
-  ["Launch", "Web and campaign setup"],
-  ["Support", "Clear communication"],
+const navItems = [
+  ["Home", "home"],
+  ["Services", "services"],
+  ["How We Work", "how-we-work"],
+  ["Projects", "projects"],
+  ["About", "about"],
+  ["FAQ", "faq"],
+  ["Contact", "contact"],
 ];
 
 const services = [
-  ["Website Development", "Premium, fast websites built to convert visitors into customers and appointments.", MonitorSmartphone],
-  ["Social Media", "Content systems that grow your audience, sharpen trust, and support real sales.", Users],
-  ["Paid Ads", "Meta and Google campaigns engineered for predictable client acquisition.", Megaphone],
-  ["Branding", "Identities, messaging, and visuals that command attention and instant trust.", PenTool],
-  ["SEO", "Rank higher on Google and get found by people who are ready to buy.", Search],
+  {
+    title: "Website Development",
+    text: "Fast, polished websites built to explain your offer clearly and turn visitors into enquiries.",
+    icon: MonitorSmartphone,
+  },
+  {
+    title: "AI Automation",
+    text: "Practical AI workflows for admin, lead handling, content support, and repeatable business tasks.",
+    icon: Bot,
+  },
+  {
+    title: "Marketing Strategy",
+    text: "Positioning, campaign planning, and lead-generation direction for businesses ready to grow.",
+    icon: Compass,
+  },
+  {
+    title: "Social Media Management",
+    text: "Content systems that keep your brand active, professional, and aligned with your sales goals.",
+    icon: Megaphone,
+  },
+  {
+    title: "Business Growth Solutions",
+    text: "A connected plan across website, automation, content, and follow-up so growth feels less random.",
+    icon: Rocket,
+  },
+];
+
+const workSteps = [
+  ["Discover", "We understand your business, audience, current website, and lead process."],
+  ["Design", "We shape the offer, user journey, visuals, and content structure."],
+  ["Build", "We create the website, booking path, automations, and marketing assets."],
+  ["Improve", "We review what is working and refine the system around better enquiries."],
+];
+
+const journey = [
+  ["Clarity", "Your offer becomes easier to understand."],
+  ["Presence", "Your website and social channels feel consistent and professional."],
+  ["Automation", "Common tasks and enquiries become easier to manage."],
+  ["Conversion", "Visitors have a clearer path to book a consultation or start a conversation."],
+];
+
+const projectTypes = [
+  ["Service Business Website", "A premium website for local companies that need trust, clarity, and lead capture."],
+  ["AI Workflow Setup", "Automation support for enquiries, internal tasks, and content operations."],
+  ["Campaign Landing Page", "A focused page for a service, offer, launch, or paid marketing campaign."],
+  ["Social Growth System", "A content and messaging foundation for consistent visibility online."],
 ];
 
 const reasons = [
-  ["Built for ROI", "Every campaign tracks revenue and booked calls, not vanity metrics."],
-  ["Specialists for service businesses", "We understand clinics, professionals, and service brands that need qualified leads."],
-  ["Trusted partnership", "Transparent reporting, clear communication, and practical growth advice."],
+  ["Modern and practical", "We focus on useful systems that make your business easier to find, understand, and contact."],
+  ["Built for business owners", "The website, content, and automations are designed around real day-to-day operations."],
+  ["Clean communication", "You get direct guidance, simple priorities, and a build that is easy to keep improving."],
 ];
 
-const agencyStack = [
-  ["Clear Offer", "Sharpen the message so visitors understand why to choose you."],
-  ["Premium Website", "Build a polished online presence that supports trust and bookings."],
-  ["Social Presence", "Create content direction for Instagram and client-facing channels."],
-  ["Booking Flow", "Connect forms, WhatsApp, and follow-up paths for smoother enquiries."],
-];
-
-const processSteps = [
-  ["Audit", "We map your current website, offer, audience, and lead flow."],
-  ["Build", "We create the landing page, campaigns, tracking, and booking path."],
-  ["Scale", "We improve what converts and move budget toward the strongest channels."],
+const faqs = [
+  ["Who do you work with?", "We work with small businesses, startups, local businesses, and growing companies that want a stronger online presence."],
+  ["Can you help if I already have a website?", "Yes. We can improve an existing website, rebuild it, or create focused landing pages for specific services."],
+  ["Do you build AI automations?", "Yes. We help set up practical AI workflows for lead handling, admin tasks, content support, and internal processes."],
+  ["How do consultations work?", "Send the booking form or message us on WhatsApp. We will review your goals and suggest the clearest next step."],
 ];
 
 function Logo() {
   return (
-    <a href="#home" className="group flex items-center gap-3" aria-label="Hapeshis Brothers Agency home">
-      <span className="grid h-12 w-12 place-items-center rounded-sm border border-white/20 bg-white/[0.06] text-lg font-black text-white shadow-premium transition group-hover:border-signal/70">
+    <a href="#home" className="group flex items-center gap-3" aria-label="Hapeshi Brothers Agency home">
+      <span className="grid h-11 w-11 place-items-center rounded-md border border-sky-300/25 bg-sky-300/10 text-base font-black text-white shadow-blue">
         HB
       </span>
       <span className="leading-tight">
-        <span className="block text-sm font-black uppercase tracking-[0.16em] text-white">Hapeshis Brothers</span>
-        <span className="block text-xs uppercase tracking-[0.22em] text-white/50">Agency</span>
+        <span className="block text-sm font-black uppercase tracking-[0.14em] text-white">Hapeshi Brothers</span>
+        <span className="block text-xs uppercase tracking-[0.18em] text-sky-100/60">Agency</span>
       </span>
     </a>
   );
@@ -71,16 +111,16 @@ function Logo() {
 
 function Button({ href, children, variant = "primary", icon: Icon = ArrowRight, ...props }) {
   const classes = {
-    primary: "bg-signal text-white hover:bg-ember shadow-[0_18px_44px_rgba(207,36,56,0.28)]",
-    secondary: "border border-white/20 bg-white/[0.04] text-white hover:border-white/40 hover:bg-white/[0.08]",
-    dark: "bg-ink text-white hover:bg-steel",
+    primary: "bg-sky-400 text-navy-950 hover:bg-sky-300 shadow-[0_18px_48px_rgba(56,189,248,0.28)]",
+    secondary: "border border-white/15 bg-white/[0.04] text-white hover:border-sky-300/50 hover:bg-white/[0.08]",
+    dark: "bg-navy-950 text-white hover:bg-slate-900",
   };
 
   return (
     <a
       href={href}
       {...props}
-      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-sm px-5 text-sm font-black uppercase tracking-[0.13em] transition ${classes[variant]}`}
+      className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-black uppercase tracking-[0.11em] transition ${classes[variant]}`}
     >
       {children}
       {Icon ? <Icon className="h-4 w-4" aria-hidden="true" /> : null}
@@ -88,18 +128,24 @@ function Button({ href, children, variant = "primary", icon: Icon = ArrowRight, 
   );
 }
 
+function SectionHeader({ kicker, title, text, dark = true }) {
+  return (
+    <div className="max-w-3xl">
+      <p className="section-kicker">{kicker}</p>
+      <h2 className={`section-title ${dark ? "text-white" : "text-navy-950"}`}>{title}</h2>
+      {text ? <p className={`mt-5 text-lg leading-8 ${dark ? "text-slate-200/70" : "text-slate-700"}`}>{text}</p> : null}
+    </div>
+  );
+}
+
 function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-ink/80 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-navy-950/75 backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary">
         <Logo />
-        <div className="hidden items-center gap-8 lg:flex">
-          {navItems.map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-xs font-bold uppercase tracking-[0.18em] text-white/60 transition hover:text-white"
-            >
+        <div className="hidden items-center gap-6 xl:flex">
+          {navItems.map(([item, id]) => (
+            <a key={id} href={`#${id}`} className="text-xs font-bold uppercase tracking-[0.16em] text-slate-200/60 transition hover:text-white">
               {item}
             </a>
           ))}
@@ -108,38 +154,44 @@ function Header() {
           <Button href="#book-appointment">Book a Free Call</Button>
         </div>
       </nav>
+      <div className="border-t border-white/10 px-4 pb-3 sm:px-6 xl:hidden">
+        <div className="mx-auto flex max-w-7xl gap-4 overflow-x-auto whitespace-nowrap">
+          {[...navItems, ["Book Appointment", "book-appointment"]].map(([item, id]) => (
+            <a key={id} href={`#${id}`} className="py-1 text-[11px] font-black uppercase tracking-[0.14em] text-slate-200/70 transition hover:text-white">
+              {item}
+            </a>
+          ))}
+        </div>
+      </div>
     </header>
   );
 }
 
-function HeroDashboard() {
+function HeroVisual() {
   return (
-    <div className="rounded-sm border border-white/10 bg-white/[0.05] p-5 shadow-premium backdrop-blur">
-      <div className="rounded-sm bg-[radial-gradient(circle_at_35%_20%,rgba(255,65,87,0.24),transparent_27%),linear-gradient(145deg,#0c2342,#050608)] p-6">
-        <div className="rounded-sm border border-white/10 bg-ink/70 p-7">
-          <div className="flex items-center justify-between">
-            <div className="grid h-20 w-20 place-items-center rounded-sm border border-signal/60 bg-signal/10 text-3xl font-black text-white">
-              HB
-            </div>
-            <span className="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-emerald-200">
-              Live
-            </span>
-          </div>
-          <p className="mt-8 text-sm font-black uppercase tracking-[0.22em] text-white/50">Agency Buildout</p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {agencyStack.map(([label, text]) => (
-              <div key={label} className="rounded-sm border border-white/10 bg-white/[0.045] p-4 transition hover:border-signal/40">
-                <p className="text-sm font-black uppercase tracking-[0.16em] text-white">{label}</p>
-                <p className="mt-3 text-sm leading-6 text-white/60">{text}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 rounded-sm border border-signal/30 bg-signal/10 p-4">
-            <p className="text-sm font-bold leading-6 text-white/70">
-              A focused digital setup for brands that want a stronger first impression and a cleaner path to enquiries.
-            </p>
-          </div>
-        </div>
+    <div className="hero-visual" aria-hidden="true">
+      <div className="hero-grid" />
+      <div className="hero-orbit hero-orbit-one" />
+      <div className="hero-orbit hero-orbit-two" />
+      <div className="hero-core">
+        <Sparkles className="h-7 w-7 text-sky-200" />
+        <span>HB Growth System</span>
+      </div>
+      <div className="hero-node node-web">
+        <MonitorSmartphone className="h-5 w-5" />
+        <span>Web</span>
+      </div>
+      <div className="hero-node node-ai">
+        <Bot className="h-5 w-5" />
+        <span>AI</span>
+      </div>
+      <div className="hero-node node-marketing">
+        <Megaphone className="h-5 w-5" />
+        <span>Marketing</span>
+      </div>
+      <div className="hero-node node-leads">
+        <MessageCircle className="h-5 w-5" />
+        <span>Leads</span>
       </div>
     </div>
   );
@@ -147,53 +199,34 @@ function HeroDashboard() {
 
 function Hero() {
   return (
-    <section id="home" className="relative isolate overflow-hidden bg-ink pt-28 text-white">
-      <div className="absolute inset-0 -z-10">
-        <img
-          src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1800&q=85"
-          alt=""
-          className="h-full w-full object-cover opacity-[0.22]"
-          loading="eager"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(115deg,#050608_0%,rgba(6,19,40,0.96)_48%,rgba(5,6,8,0.74)_100%)]" />
-      </div>
-
-      <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.06fr_0.94fr] lg:px-8">
+    <section id="home" className="relative isolate overflow-hidden bg-navy-950 pt-36 text-white xl:pt-28">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(56,189,248,0.24),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.2),transparent_32%),linear-gradient(180deg,#07162f_0%,#0b1733_55%,#0f1f3d_100%)]" />
+      <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
         <div>
-          <p className="mb-5 inline-flex items-center gap-2 rounded-sm border border-signal/50 bg-signal/10 px-3 py-2 text-xs font-black uppercase tracking-[0.2em] text-red-100">
-            <Sparkles className="h-4 w-4 text-ember" aria-hidden="true" />
-            AI-powered marketing agency
+          <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
+            <Sparkles className="h-4 w-4 text-sky-300" aria-hidden="true" />
+            AI, marketing and web development
           </p>
-          <h1 className="max-w-4xl text-5xl font-black leading-[0.95] tracking-normal text-white sm:text-6xl lg:text-7xl">
-            We Help Businesses Get More Clients Online
+          <h1 className="max-w-4xl text-5xl font-black leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl">
+            Helping Businesses Grow with AI, Marketing & Modern Websites
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70 sm:text-xl">
-            Websites, ads, and social media systems that bring real results, built for clinics and service businesses ready to grow.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-100/75 sm:text-xl">
+            Hapeshi Brothers Agency helps businesses improve their online presence, automate everyday work, and generate more qualified leads through modern websites, AI systems, and marketing strategy.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button href="#book-appointment">Book a Free Consultation</Button>
-            <Button href="#services" variant="secondary">Explore Services</Button>
+            <Button href="#services" variant="secondary">View Services</Button>
           </div>
-          <div className="mt-9 flex flex-wrap gap-3 text-sm font-semibold text-white/70">
-            {["No long contracts", "Results-focused", "Worldwide service"].map((item) => (
+          <div className="mt-8 flex flex-wrap gap-3 text-sm font-semibold text-slate-200/75">
+            {["Websites that explain clearly", "Automation that saves time", "Marketing built around enquiries"].map((item) => (
               <span key={item} className="inline-flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 text-ember" aria-hidden="true" />
+                <BadgeCheck className="h-4 w-4 text-sky-300" aria-hidden="true" />
                 {item}
               </span>
             ))}
           </div>
         </div>
-
-        <HeroDashboard />
-      </div>
-
-      <div className="mx-auto grid max-w-7xl grid-cols-2 border-y border-white/10 px-4 sm:px-6 lg:grid-cols-4 lg:px-8">
-        {stats.map(([value, label]) => (
-          <div key={label} className="border-white/10 py-7 odd:border-r lg:border-r lg:last:border-r-0">
-            <p className="text-4xl font-black text-white">{value}</p>
-            <p className="mt-2 text-xs font-bold uppercase tracking-[0.18em] text-white/50">{label}</p>
-          </div>
-        ))}
+        <HeroVisual />
       </div>
     </section>
   );
@@ -201,103 +234,173 @@ function Hero() {
 
 function Services() {
   return (
-    <section id="services" className="bg-midnight py-20 text-white sm:py-28">
+    <section id="services" className="bg-slate-950 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="section-kicker">What We Do</p>
-          <h2 className="section-title">Full-stack growth systems</h2>
-          <p className="mt-5 text-lg leading-8 text-white/60">
-            Everything you need to attract, convert, and retain clients, built and managed by experts.
-          </p>
-        </div>
-
+        <SectionHeader
+          kicker="Services"
+          title="A connected growth stack for modern businesses"
+          text="Choose one service or combine them into a practical system for your website, marketing, operations, and lead generation."
+        />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {services.map(([title, text, Icon]) => (
-            <article key={title} className="group rounded-sm border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-signal/50 hover:bg-white/[0.055]">
-              <Icon className="h-7 w-7 text-ember" aria-hidden="true" />
-              <h3 className="mt-8 text-xl font-bold text-white">{title}</h3>
-              <p className="mt-4 text-sm leading-7 text-white/60">{text}</p>
+          {services.map(({ title, text, icon: Icon }) => (
+            <article key={title} className="group rounded-lg border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-sky-300/40 hover:bg-white/[0.06]">
+              <div className="grid h-11 w-11 place-items-center rounded-md border border-sky-300/20 bg-sky-300/10 text-sky-200">
+                <Icon className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <h3 className="mt-7 text-xl font-bold text-white">{title}</h3>
+              <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
             </article>
           ))}
         </div>
-
-        <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-sm border border-signal/30 bg-signal/10 p-6 sm:flex-row sm:items-center">
-          <p className="max-w-2xl text-lg font-semibold text-white">Ready to grow? Book a free strategy call. No pressure, just clarity.</p>
-          <Button href="#book-appointment">Book a Free Call</Button>
-        </div>
       </div>
     </section>
   );
 }
 
-function About() {
+function HowWeWork() {
   return (
-    <section id="about" className="bg-ink py-20 text-white sm:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
-        <div>
-          <p className="section-kicker">Why Hapeshis Brothers</p>
-          <h2 className="section-title">Modern strategy. AI execution. Real growth.</h2>
-          <p className="mt-6 text-lg leading-8 text-white/60">
-            We do not sell marketing fluff. We build measurable client-acquisition systems for businesses that mean business.
-          </p>
-          <div className="mt-9 space-y-4">
-            {reasons.map(([title, text]) => (
-              <div key={title} className="rounded-sm border border-white/10 bg-white/[0.035] p-5">
-                <div className="flex items-start gap-3">
-                  <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-ember" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-bold text-white">{title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-white/60">{text}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-sm border border-white/10 bg-white/[0.05] p-6 shadow-premium">
-          <div className="flex items-center justify-between border-b border-white/10 pb-5">
-            <div>
-              <p className="text-xs font-black uppercase tracking-[0.18em] text-white/40">What We Build</p>
-              <h3 className="mt-2 text-2xl font-black text-white">A cleaner online presence</h3>
-            </div>
-            <Sparkles className="h-8 w-8 text-ember" aria-hidden="true" />
-          </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
-            {agencyStack.map(([label, text]) => (
-              <div key={label} className="rounded-sm bg-ink/70 p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/40">{label}</p>
-                <p className="mt-3 text-sm leading-7 text-white/62">{text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Process() {
-  return (
-    <section className="bg-ink py-20 text-white sm:py-28">
+    <section id="how-we-work" className="bg-navy-900 py-20 text-white sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="section-kicker">How It Works</p>
-            <h2 className="section-title">A cleaner path from attention to booked calls.</h2>
-            <p className="mt-5 text-lg leading-8 text-white/60">
-              The site, campaigns, analytics, and appointment flow work together as one growth engine.
-            </p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {processSteps.map(([title, text]) => (
-              <article key={title} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
-                <div className="mb-8 grid h-12 w-12 place-items-center rounded-sm bg-signal text-lg font-black text-white">
-                  <BadgeCheck className="h-6 w-6" aria-hidden="true" />
+          <SectionHeader
+            kicker="How We Work"
+            title="Simple process, clear decisions"
+            text="We keep the work focused so business owners can move from unclear digital presence to a system that supports enquiries."
+          />
+          <div className="grid gap-4 md:grid-cols-2">
+            {workSteps.map(([title, text]) => (
+              <article key={title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+                <div className="mb-7 grid h-11 w-11 place-items-center rounded-md bg-sky-300/10 text-sky-200">
+                  <Workflow className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-black text-white">{title}</h3>
-                <p className="mt-4 text-sm leading-7 text-white/60">{text}</p>
+                <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
               </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ResultsJourney() {
+  return (
+    <section id="results" className="bg-slate-950 py-20 text-white sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          kicker="Results Journey"
+          title="From scattered presence to a clearer growth system"
+          text="No invented metrics. The goal is real improvement in clarity, workflow, trust, and the path from visitor to conversation."
+        />
+        <div className="mt-12 grid gap-4 lg:grid-cols-4">
+          {journey.map(([title, text]) => (
+            <article key={title} className="rounded-lg border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.055),rgba(255,255,255,0.025))] p-6">
+              <CheckCircle2 className="h-6 w-6 text-sky-300" aria-hidden="true" />
+              <h3 className="mt-7 text-xl font-black text-white">{title}</h3>
+              <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Projects() {
+  return (
+    <section id="projects" className="bg-navy-900 py-20 text-white sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+          <SectionHeader
+            kicker="Portfolio / Projects"
+            title="Project tracks we can build with you"
+            text="Rather than showing invented case studies, this section shows the types of work Hapeshi Brothers Agency can create for your business."
+          />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {projectTypes.map(([title, text]) => (
+              <article key={title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+                <LayoutDashboard className="h-6 w-6 text-violet-200" aria-hidden="true" />
+                <h3 className="mt-7 text-xl font-black text-white">{title}</h3>
+                <p className="mt-4 text-sm leading-7 text-slate-200/60">{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function WhyChooseUs() {
+  return (
+    <section id="about" className="bg-slate-950 py-20 text-white sm:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <SectionHeader
+          kicker="Why Choose Us"
+          title="Premium execution without the noise"
+          text="Hapeshi Brothers Agency combines web development, AI automation, and marketing thinking into one clean, practical build."
+        />
+        <div className="space-y-4">
+          {reasons.map(([title, text]) => (
+            <article key={title} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+              <div className="flex items-start gap-4">
+                <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-sky-300" aria-hidden="true" />
+                <div>
+                  <h3 className="font-bold text-white">{title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-slate-200/60">{text}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function FAQ() {
+  return (
+    <section id="faq" className="bg-navy-900 py-20 text-white sm:py-28">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <SectionHeader kicker="FAQ" title="Questions before you book" text="A few simple answers before we talk about your business." />
+        <div className="mt-10 divide-y divide-white/10 rounded-lg border border-white/10 bg-white/[0.04]">
+          {faqs.map(([question, answer]) => (
+            <details key={question} className="group p-6">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-left text-lg font-bold text-white">
+                {question}
+                <ChevronDown className="h-5 w-5 shrink-0 text-sky-300 transition group-open:rotate-180" aria-hidden="true" />
+              </summary>
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-200/60">{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Contact() {
+  return (
+    <section id="contact" className="bg-slate-950 py-20 text-white sm:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
+          <SectionHeader
+            kicker="Contact"
+            title="Start with a conversation"
+            text="Send a message on WhatsApp, visit Instagram, or use the appointment form below."
+          />
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              [MessageCircle, "WhatsApp", "+357 96410472"],
+              [Instagram, "Instagram", "@hapeshisb_marketing"],
+              [Clock, "Hours", "Mon - Sat, 9am - 7pm"],
+            ].map(([Icon, label, value]) => (
+              <div key={label} className="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+                <Icon className="h-5 w-5 text-sky-300" aria-hidden="true" />
+                <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-slate-200/50">{label}</p>
+                <p className="mt-2 text-lg font-bold text-white">{value}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -332,21 +435,25 @@ function BookingForm() {
   }
 
   return (
-    <section id="book-appointment" className="bg-white py-20 text-ink sm:py-28">
+    <section id="book-appointment" className="bg-white py-20 text-navy-950 sm:py-28">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <div>
-          <p className="section-kicker text-signal">Book Appointment</p>
-          <h2 className="section-title text-ink">Your next move could change everything.</h2>
-          <p className="mt-6 text-lg leading-8 text-black/60">
-            Book a free strategy call and we will show you exactly how to get more clients, whether you work with us or not.
+          <p className="section-kicker text-sky-600">Book Appointment</p>
+          <h2 className="section-title text-navy-950">Book a free consultation</h2>
+          <p className="mt-6 text-lg leading-8 text-slate-700">
+            Tell us what you want to improve. We will review your goals and suggest a clear next step for your website, automation, or marketing.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Button href={contact.whatsapp} variant="dark" icon={MessageCircle} target="_blank" rel="noreferrer">WhatsApp</Button>
-            <Button href={contact.instagram} variant="dark" icon={Instagram} target="_blank" rel="noreferrer">Instagram</Button>
+            <Button href={contact.whatsapp} variant="dark" icon={MessageCircle} target="_blank" rel="noreferrer">
+              WhatsApp
+            </Button>
+            <Button href={contact.instagram} variant="dark" icon={Instagram} target="_blank" rel="noreferrer">
+              Instagram
+            </Button>
           </div>
         </div>
 
-        <form onSubmit={handleSubmit} className="grid gap-4 rounded-sm border border-black/10 bg-[#f5f7fb] p-5 sm:grid-cols-2 sm:p-7" aria-label="Appointment booking form">
+        <form onSubmit={handleSubmit} className="grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-5 sm:grid-cols-2 sm:p-7" aria-label="Appointment booking form">
           <label className="hidden" aria-hidden="true">
             Company
             <input type="text" name="company" tabIndex="-1" autoComplete="off" />
@@ -367,7 +474,7 @@ function BookingForm() {
             <span>Service</span>
             <select required name="service" defaultValue="">
               <option value="" disabled>Select service</option>
-              {services.map(([title]) => <option key={title}>{title}</option>)}
+              {services.map(({ title }) => <option key={title}>{title}</option>)}
             </select>
           </label>
           <label className="form-field">
@@ -382,12 +489,12 @@ function BookingForm() {
             <span>Project Details</span>
             <textarea name="message" rows="5" placeholder="Tell us what you want to improve." />
           </label>
-          <button disabled={status === "sending"} type="submit" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-sm bg-signal px-5 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-ember disabled:cursor-not-allowed disabled:opacity-70 sm:col-span-2">
+          <button disabled={status === "sending"} type="submit" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-sky-500 px-5 text-sm font-black uppercase tracking-[0.13em] text-navy-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-70 sm:col-span-2">
             {status === "sending" ? "Sending..." : "Send Request"}
             <CalendarDays className="h-4 w-4" aria-hidden="true" />
           </button>
           {notice ? (
-            <p className={`rounded-sm px-4 py-3 text-sm font-semibold normal-case tracking-normal sm:col-span-2 ${status === "error" ? "bg-red-50 text-red-700" : "bg-emerald-50 text-emerald-700"}`}>
+            <p className={`rounded-md px-4 py-3 text-sm font-semibold normal-case tracking-normal sm:col-span-2 ${status === "error" ? "bg-red-50 text-red-700" : "bg-emerald-50 text-emerald-700"}`}>
               {notice}
             </p>
           ) : null}
@@ -397,41 +504,13 @@ function BookingForm() {
   );
 }
 
-function Contact() {
-  return (
-    <section id="contact" className="bg-midnight py-20 text-white sm:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr]">
-          <div>
-            <p className="section-kicker">Contact</p>
-            <h2 className="section-title">Built to convert. Engineered to scale.</h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {[
-              [MessageCircle, "WhatsApp", "+357 96410472"],
-              [Instagram, "Instagram", "@hapeshisb_marketing"],
-              [Clock, "Hours", "Mon - Sat, 9am - 7pm"],
-            ].map(([Icon, label, value]) => (
-              <div key={label} className="rounded-sm border border-white/10 bg-white/[0.035] p-6">
-                <Icon className="h-5 w-5 text-ember" aria-hidden="true" />
-                <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/40">{label}</p>
-                <p className="mt-2 text-lg font-bold text-white">{value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function FloatingSocials() {
   return (
     <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
-      <a className="social-button bg-[#25d366]" href={contact.whatsapp} target="_blank" rel="noreferrer" aria-label="Contact Hapeshis Brothers Agency on WhatsApp">
+      <a className="social-button bg-[#25d366]" href={contact.whatsapp} target="_blank" rel="noreferrer" aria-label="Contact Hapeshi Brothers Agency on WhatsApp">
         <MessageCircle className="h-5 w-5" />
       </a>
-      <a className="social-button bg-[linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)]" href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Open Hapeshis Brothers Agency on Instagram">
+      <a className="social-button bg-[linear-gradient(135deg,#5b5ff4,#8b5cf6,#38bdf8)]" href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Open Hapeshi Brothers Agency on Instagram">
         <Instagram className="h-5 w-5" />
       </a>
     </div>
@@ -440,13 +519,13 @@ function FloatingSocials() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-ink py-10 text-white">
+    <footer className="border-t border-white/10 bg-navy-950 py-10 text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
         <Logo />
-        <p className="max-w-lg text-sm leading-6 text-white/50">
-          AI-powered marketing systems that bring real clients to small businesses, clinics, and service professionals worldwide.
+        <p className="max-w-lg text-sm leading-6 text-slate-200/60">
+          AI, marketing, and web development systems for businesses that want a stronger online presence and a clearer path to leads.
         </p>
-        <p className="text-sm text-white/50">(c) 2026 Hapeshis Brothers Agency. All rights reserved.</p>
+        <p className="text-sm text-slate-200/50">(c) 2026 Hapeshi Brothers Agency. All rights reserved.</p>
       </div>
     </footer>
   );
@@ -459,10 +538,13 @@ function App() {
       <main>
         <Hero />
         <Services />
-        <About />
-        <Process />
-        <BookingForm />
+        <HowWeWork />
+        <ResultsJourney />
+        <Projects />
+        <WhyChooseUs />
+        <FAQ />
         <Contact />
+        <BookingForm />
       </main>
       <Footer />
       <FloatingSocials />

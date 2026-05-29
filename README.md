@@ -1,12 +1,16 @@
-# Hapeshis Brothers Agency
+# Hapeshi Brothers Agency
 
-Clean React + Tailwind CSS recreation of a premium agency landing page for Hapeshis Brothers Agency.
+Clean React + Tailwind CSS recreation of a premium agency landing page for Hapeshi Brothers Agency.
 
 ## Sections
 
 - Home
 - Services
-- About
+- How We Work
+- Results Journey
+- Portfolio / Projects
+- Why Choose Us
+- FAQ
 - Contact
 - Book Appointment
 - WhatsApp and Instagram action buttons
@@ -50,7 +54,7 @@ Add these environment variables in Vercel Project Settings:
 VITE_SUPABASE_URL=https://oiollhqidydvobmicfak.supabase.co
 VITE_SUPABASE_ANON_KEY=your Supabase publishable key
 VITE_WHATSAPP_NUMBER=35796410472
-VITE_WHATSAPP_MESSAGE=Hello Hapeshis Brothers Agency, I would like to book a free consultation.
+VITE_WHATSAPP_MESSAGE=Hello Hapeshi Brothers Agency, I would like to book a free consultation.
 VITE_INSTAGRAM_URL=https://instagram.com/hapeshisb_marketing
 ```
 

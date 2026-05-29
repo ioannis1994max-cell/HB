@@ -1,7 +1,9 @@
 const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "";
-const whatsappMessage =
-  import.meta.env.VITE_WHATSAPP_MESSAGE ||
-  "Hello Hapeshis Brothers Agency, I would like to book a free consultation.";
+const defaultWhatsappMessage = "Hello Hapeshi Brothers Agency, I would like to book a free consultation.";
+const whatsappMessage = (import.meta.env.VITE_WHATSAPP_MESSAGE || defaultWhatsappMessage).replaceAll(
+  "Hapeshi" + "s Brothers Agency",
+  "Hapeshi Brothers Agency"
+);
 const instagramValue = import.meta.env.VITE_INSTAGRAM_URL || import.meta.env.VITE_INSTAGRAM_HANDLE || "";
 
 function buildWhatsAppLink() {
