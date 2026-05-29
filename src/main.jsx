@@ -12,12 +12,14 @@ import {
   Instagram,
   LayoutDashboard,
   Megaphone,
+  Menu,
   MessageCircle,
   MonitorSmartphone,
   Rocket,
   ShieldCheck,
   Sparkles,
   Workflow,
+  X,
 } from "lucide-react";
 import { submitBookingRequest } from "./lib/bookings";
 import { contact } from "./config/contact";
@@ -287,7 +289,7 @@ function Button({ href, children, variant = "primary", icon: Icon = ArrowRight, 
     <a
       href={href}
       {...props}
-      className={`premium-button inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-5 text-sm font-black uppercase tracking-[0.11em] transition ${classes[variant]}`}
+      className={`premium-button inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-md px-5 text-sm font-black uppercase tracking-[0.11em] transition sm:w-auto ${classes[variant]}`}
     >
       {children}
       {Icon ? <Icon className="h-4 w-4" aria-hidden="true" /> : null}
@@ -306,6 +308,9 @@ function SectionHeader({ kicker, title, text, dark = true }) {
 }
 
 function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const mobileNavItems = [...navItems, ["Book Appointment", "book-appointment"]];
+
   return (
     <header className="fixed inset-x-0 top-0 z-40 border-b border-white/10 bg-navy-950/75 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-5 px-4 py-4 sm:px-6 lg:px-8" aria-label="Primary">
@@ -320,11 +325,21 @@ function Header() {
         <div className="hidden sm:block">
           <Button href="#book-appointment">Book a Free Call</Button>
         </div>
+        <button
+          type="button"
+          className="mobile-menu-toggle xl:hidden"
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          <span className="sr-only">Toggle navigation</span>
+          {isMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+        </button>
       </nav>
-      <div className="border-t border-white/10 px-4 pb-3 sm:px-6 xl:hidden">
-        <div className="mx-auto flex max-w-7xl gap-4 overflow-x-auto whitespace-nowrap">
-          {[...navItems, ["Book Appointment", "book-appointment"]].map(([item, id]) => (
-            <a key={id} href={`#${id}`} className="py-1 text-[11px] font-black uppercase tracking-[0.14em] text-slate-200/70 transition hover:text-white">
+      <div id="mobile-navigation" className={`mobile-nav-panel xl:hidden ${isMenuOpen ? "is-open" : ""}`}>
+        <div className="mobile-nav-links">
+          {mobileNavItems.map(([item, id]) => (
+            <a key={id} href={`#${id}`} className="mobile-nav-link" onClick={() => setIsMenuOpen(false)}>
               {item}
             </a>
           ))}
@@ -422,16 +437,16 @@ function HeroVisual() {
 
 function Hero() {
   return (
-    <section id="home" className="hero-shell relative isolate overflow-hidden bg-navy-950 pt-36 text-white xl:pt-28">
+    <section id="home" className="hero-shell relative isolate overflow-hidden bg-navy-950 pt-28 text-white sm:pt-32 xl:pt-28">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,rgba(56,189,248,0.24),transparent_34%),radial-gradient(circle_at_80%_20%,rgba(139,92,246,0.2),transparent_32%),linear-gradient(180deg,#07162f_0%,#0b1733_55%,#0f1f3d_100%)]" />
       <div className="hero-spotlight" aria-hidden="true" />
-      <div className="mx-auto grid min-h-[760px] max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
+      <div className="hero-layout mx-auto grid max-w-7xl items-center gap-10 px-4 pb-14 pt-8 sm:px-6 sm:pb-16 sm:pt-12 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
         <div className="reveal-on-scroll">
           <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-sky-300/25 bg-sky-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-sky-100">
             <Sparkles className="h-4 w-4 text-sky-300" aria-hidden="true" />
             AI, marketing and web development
           </p>
-          <h1 className="max-w-4xl text-5xl font-black leading-[0.98] tracking-normal text-white sm:text-6xl lg:text-7xl">
+          <h1 className="max-w-4xl text-4xl font-black leading-[1.04] tracking-normal text-white sm:text-6xl sm:leading-[0.98] lg:text-7xl">
             Helping Businesses Grow with AI, Marketing & Modern Websites
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-100/75 sm:text-xl">

@@ -11,6 +11,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
   }
 
   body {
@@ -62,10 +63,92 @@
   .form-field select,
   .form-field textarea {
     @apply w-full rounded-md border border-slate-200 bg-white px-4 py-3 text-base font-semibold normal-case tracking-normal text-navy-950 outline-none transition placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-400/15;
+    min-height: 3rem;
+  }
+
+  .form-field textarea {
+    min-height: 7rem;
   }
 
   .social-button {
     @apply grid h-12 w-12 place-items-center rounded-md text-white shadow-blue transition hover:-translate-y-1;
+  }
+
+  section {
+    scroll-margin-top: 5.5rem;
+  }
+
+  .mobile-menu-toggle {
+    display: inline-grid;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.055);
+    color: #ffffff;
+    transition:
+      border-color 240ms ease,
+      background-color 240ms ease,
+      transform 240ms ease;
+  }
+
+  .mobile-menu-toggle:hover {
+    border-color: rgba(125, 211, 252, 0.44);
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-1px);
+  }
+
+  .mobile-nav-panel {
+    max-height: 0;
+    overflow: hidden;
+    border-top: 0 solid rgba(255, 255, 255, 0.1);
+    transition:
+      max-height 280ms ease,
+      border-top-width 280ms ease;
+  }
+
+  .mobile-nav-panel.is-open {
+    max-height: 75vh;
+    border-top-width: 1px;
+  }
+
+  .mobile-nav-links {
+    display: grid;
+    max-width: 80rem;
+    gap: 0.4rem;
+    margin: 0 auto;
+    padding: 0.75rem 1rem 1rem;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    min-height: 2.9rem;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.035);
+    padding: 0.78rem 0.9rem;
+    color: rgba(226, 232, 240, 0.82);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition:
+      border-color 240ms ease,
+      background-color 240ms ease,
+      color 240ms ease;
+  }
+
+  .mobile-nav-link:hover {
+    border-color: rgba(125, 211, 252, 0.32);
+    background: rgba(56, 189, 248, 0.08);
+    color: #ffffff;
+  }
+
+  .hero-layout {
+    min-height: 760px;
   }
 
   .contact-grid {
@@ -231,7 +314,7 @@
 
   @media (min-width: 640px) {
     .contact-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .booking-form {
@@ -241,6 +324,12 @@
 
     .booking-submit {
       grid-column: span 2 / span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
@@ -1220,6 +1309,74 @@
       right: 4%;
       top: auto;
       bottom: 14%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section-kicker {
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.16em;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      line-height: 1.12;
+    }
+
+    .section-title::after {
+      width: 58px;
+      margin-top: 1rem;
+    }
+
+    section.reveal-on-scroll {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .hero-layout {
+      min-height: auto;
+      gap: 2.25rem;
+    }
+
+    .premium-button {
+      min-height: 3.15rem;
+      padding-right: 1rem;
+      padding-left: 1rem;
+      text-align: center;
+    }
+
+    .motion-ready .reveal-on-scroll {
+      transform: translateY(18px);
+      transition-duration: 520ms;
+    }
+
+    .service-card,
+    .project-card,
+    .contact-card {
+      min-height: auto;
+      padding: 1.05rem;
+    }
+
+    .service-card h3,
+    .project-card h3 {
+      font-size: 1.06rem;
+    }
+
+    .contact-value {
+      font-size: 0.98rem;
+    }
+
+    .booking-form {
+      padding: 1rem;
+    }
+
+    .booking-benefits span {
+      flex: 1 1 auto;
+      justify-content: center;
+    }
+
+    .hero-node {
+      animation: none;
     }
   }
 
